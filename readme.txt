@@ -17,7 +17,7 @@ If you ever wanted to get additional informations from customers while adding wo
 * Validation and custom messages
 * Grouping custom fields
 * Assign groups to particular product or to particular product categories
-* Embeds custom fields into cart page, checkout page, order page and order confirmation emails
+* Automatically embeds custom fields meta into cart page, checkout page, order page and order confirmation emails
 * Powerful API to customize the appearance of custom fields
 
 = Field Types =
