@@ -7,7 +7,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WC Fields Factory allows you to add custom fields to your woocommerce product page, to get additional information from customers while adding products to cart.
+It allows you to add custom fields to your woocommerce product page, to get additional information from customers while adding products to cart.
 
 == Description ==
 
