@@ -13,12 +13,12 @@ It allows you to add custom fields to your woocommerce product page, to get addi
 
 If you ever wanted to get additional informations from customers while adding woocommerce products to cart, This is the plugin all you need. It allows you to add custom fields to your woocommerce product page. You can add custom fields and validations without tweaking any of your theme's code & templates, It also allows you to group the fields and add them to particular products or for particular product categories.
 
-=How it Works=
+= How it Works =
 * Create a fields group
 * Add fields to the group
 * Assign fields group to whatever products or products category you want
 
-=Features=
+= Features =
 * Powerful interface to create your custom fields
 * Validation and custom messages
 * Grouping custom fields
@@ -26,7 +26,7 @@ If you ever wanted to get additional informations from customers while adding wo
 * Automatically embeds custom fields meta into cart page, checkout page, order page and order confirmation emails
 * Powerful API to customize the appearance of custom fields
 
-= Field Types =
+= Supported Field Types =
 * Text 
 * Number
 * Email
