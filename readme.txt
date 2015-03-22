@@ -1,7 +1,7 @@
 === WC Fields Factory ===
 Contributors: mycholan
 Tags: wc fields factory, custom product fields, customize woocommerce product page, add custom fields to woocommerce product page, custom fields validations, custom fields grouping, 
-Requires at least: 3.8
+Requires at least: 3.5
 Tested up to: 4.1.1
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -13,6 +13,12 @@ It allows you to add custom fields to your woocommerce product page, to get addi
 
 If you ever wanted to get additional informations from customers while adding woocommerce products to cart, This is the plugin all you need. It allows you to add custom fields to your woocommerce product page. You can add custom fields and validations without tweaking any of your theme's code & templates, It also allows you to group the fields and add them to particular products or for particular product categories.
 
+=How it Works=
+* Create a fields group
+* Add fields to the group
+* Assign fields group to whatever products or products category you want
+
+=Features=
 * Powerful interface to create your custom fields
 * Validation and custom messages
 * Grouping custom fields
