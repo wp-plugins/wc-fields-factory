@@ -1,0 +1,49 @@
+table.wccpf_fields_table {
+	width:100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+table.wccpf_fields_table td.label {
+	width:100px;
+}
+
+table.wccpf_fields_table td.value input[type=text],
+table.wccpf_fields_table td.value input[type=number],
+table.wccpf_fields_table td.value input[type=email],
+table.wccpf_fields_table td.value input[type=password],
+table.wccpf_fields_table td.value textarea,
+table.wccpf_fields_table td.value select {
+	width: 100%;
+	padding: 5px;
+	height: auto;
+	border: 1px solid #ddd;
+	-ms-box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-ms-border-radius:0px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+table.wccpf_fields_table td.value textarea {
+	resize: vertical;
+}
+
+ul.wccpf-field-layout-horizontal {
+	display:block;
+}
+
+ul.wccpf-field-layout-horizontal li {
+	margin-right: 10px;
+	display:inline-block;
+}
+
+ul.wccpf-field-layout-vertical li {
+	display:block;
+}
