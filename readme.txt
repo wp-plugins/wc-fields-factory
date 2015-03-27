@@ -51,5 +51,5 @@ If you ever wanted to get additional informations from customers while adding wo
 = 1.0.0 =
 * First Public Release.
 
-= 1.0.1
+= 1.0.1 =
 * "wccpf/before/field/rendering" and "wccpf/after/field/rendering" actions has been added to customize wccpf fields rendering
