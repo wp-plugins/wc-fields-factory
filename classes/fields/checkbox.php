@@ -93,6 +93,32 @@ class wccpf_field_checkbox extends wccpf_product_field {
 		$layout = ( $field['layout'] == "horizontal" ) ? "wccpf-field-layout-horizontal" : "wccpf-field-layout-vertical"; 
 		ob_start();	
 	?>
+	
+		<?php if( has_action('wccpf/before/field/rendering' ) && has_action('wccpf/after/field/rendering' ) ) : ?>
+		
+			<?php do_action( 'wccpf/before/field/rendering', $field["name"], $field["label"] ); ?>
+			
+			<ul class="<?php echo $layout; ?>">
+			<?php 	
+				$attr = '';
+				$choices = explode( "\n", $field["choices"] );
+				$defaults = explode( "\n", $field["default_value"] );
+
+				foreach ( $choices as $choice ) {
+					if( in_array( $choice, $defaults ) ) {
+						$attr = 'checked="yes"';
+					} else {
+						$attr = '';
+					}
+					$key_val = explode( "|", $choice ); ?>
+					<li><label><input type="checkbox" name="<?php echo esc_attr( $field["name"] ); ?>[]" value="<?php echo esc_attr( trim( $key_val[0] ) ) ?>" <?php echo $attr; ?>/> <?php echo esc_attr( trim( $key_val[1] ) ); ?></label></li>										
+				<?php } ?>										
+			</ul>
+			
+			<?php do_action( 'wccpf/after/field/rendering' ); ?>
+		
+		<?php else : ?>
+	
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
@@ -117,7 +143,10 @@ class wccpf_field_checkbox extends wccpf_product_field {
 					</td>
 				</tr>
 			</tbody>
-		</table>			
+		</table>		
+		
+		<?php endif; ?>
+			
 	<?php return ob_get_clean();	
 	}
 	

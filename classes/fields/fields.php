@@ -1,7 +1,8 @@
 <?php 
 /**
- * @author 	Saravana Kumar K
- * @todo	Base class for all field classes, Provide common properties and hooks for fields related operations
+ * @author 		: Saravana Kumar K
+ * @copyright	: sarkware.com
+ * @todo		: Base class for all field classes, Provides common properties and hooks for fields related operations
  *
  */
 
@@ -32,8 +33,7 @@ class wccpf_product_field {
 		if( is_callable($function_to_add) ) {
 			add_action($tag, $function_to_add, $priority, $accepted_args);
 		}
-	}
-	
+	}	
 
 	function get_params() {
 		return $this->params;

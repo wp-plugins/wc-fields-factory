@@ -100,6 +100,17 @@ class wccpf_field_textarea extends wccpf_product_field {
 	}
 	
 	function render_product_field( $field ) { ob_start(); ?>
+	
+		<?php if( has_action('wccpf/before/field/rendering' ) && has_action('wccpf/after/field/rendering' ) ) : ?>
+		
+			<?php do_action( 'wccpf/before/field/rendering', $field["name"], $field["label"] ); ?>
+			
+			<textarea name="<?php echo esc_attr( $field["name"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" rows="<?php echo esc_attr( $field["rows"] ); ?>" maxlength="<?php echo esc_attr( $field["maxlength"] ); ?>"><?php echo esc_attr( $field["default_value"] ); ?></textarea>
+			
+			<?php do_action( 'wccpf/after/field/rendering' ); ?>
+		
+		<?php else : ?>	
+		
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
@@ -110,6 +121,9 @@ class wccpf_field_textarea extends wccpf_product_field {
 				</tr>
 			</tbody>
 		</table>
+		
+		<?php endif; ?>
+		
 	<?php return ob_get_clean();
 	}
 	

@@ -74,6 +74,30 @@ class wccpf_field_select extends wccpf_product_field {
 	}
 	
 	function render_product_field( $field ) { ob_start(); ?>
+	
+		<?php if( has_action('wccpf/before/field/rendering' ) && has_action('wccpf/after/field/rendering' ) ) : ?>
+		
+			<?php do_action( 'wccpf/before/field/rendering', $field["name"], $field["label"] ); ?>
+			
+			<select name="<?php echo esc_attr( $field["name"] ); ?>">
+			<?php 							
+			$attr = '';
+			$choices = explode( "\n", $field["choices"] );					
+			foreach ( $choices as $choice ) {			
+				if( $choice == $field["default_value"] ) {
+					$attr = 'selected="selected"';
+				} else {
+					$attr = '';
+				}
+				$key_val = explode( "|", $choice );
+				echo '<option value="'. esc_attr( trim( $key_val[0] ) ) .'" '. $attr .'>'. esc_attr( trim( $key_val[1] ) ) .'</option>';
+			} ?>		
+			</select>
+			
+			<?php do_action( 'wccpf/after/field/rendering' ); ?>
+		
+		<?php else : ?>
+	
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
@@ -97,6 +121,9 @@ class wccpf_field_select extends wccpf_product_field {
 				</tr>
 			</tbody>
 		</table>
+		
+		<?php endif; ?>
+		
 	<?php return ob_get_clean();	
 	}
 	
