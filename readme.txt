@@ -35,6 +35,10 @@ If you ever wanted to get additional informations from customers while adding wo
 * Radio 
 * Select
 
+= Documentation =
+* [Getting Started](http://sarkware.com/wc-fields-factory-a-wordpress-plugin-to-add-custom-fields-to-woocommerce-product-page/)
+* [Customize Rendering Behavior](http://sarkware.com/how-to-change-wc-fields-factory-custom-product-fields-rendering-behavior/)
+
 == Installation ==
 1. Ensure you have latest version of WooCommerce plugin installed ( 2.2 or above )
 2. Unzip and upload contents of the plugin to your /wp-content/plugins/ directory
