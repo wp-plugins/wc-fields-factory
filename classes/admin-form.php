@@ -53,7 +53,7 @@ class wccpf_admin_form {
 				
 				if($keys) {
 					foreach($keys as $key) {
-						if( strpos($key, 'field_') !== false && strpos($key, 'wccpf_group_rules') === false ) {
+						if( strpos($key, 'wccpf_') !== false && strpos($key, 'wccpf_group_rules') === false ) {
 							$count++;
 						}
 					}
