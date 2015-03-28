@@ -109,6 +109,17 @@ class wccpf_field_number extends wccpf_product_field {
 	}
 	
 	function render_product_field( $field ) { ob_start(); ?>
+	
+		<?php if( has_action('wccpf/before/field/rendering' ) && has_action('wccpf/after/field/rendering' ) ) : ?>
+		
+			<?php do_action( 'wccpf/before/field/rendering', $field["name"], $field["label"] ); ?>
+			
+			<input type="number" name="<?php echo esc_attr( $field["name"] ); ?>" value="<?php echo esc_attr( $field["default_value"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" min="<?php echo esc_attr( $field["min"] ); ?>" max="<?php echo esc_attr( $field["max"] ); ?>" step="<?php echo esc_attr( $field["step"] ); ?>"/>
+			
+			<?php do_action( 'wccpf/after/field/rendering' ); ?>
+		
+		<?php else : ?>
+	
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
@@ -118,7 +129,10 @@ class wccpf_field_number extends wccpf_product_field {
 					</td>
 				</tr>
 			</tbody>
-		</table>	
+		</table>
+		
+		<?php endif; ?>
+			
 	<?php return ob_get_clean();
 	
 	}

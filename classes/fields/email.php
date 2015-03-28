@@ -11,8 +11,7 @@ class wccpf_field_email extends wccpf_product_field {
 		$this->message 		= "This field can't be Empty";
 		$this->params 		= array(
 			'placeholder'	=>	'',
-			'default_value'	=>	'',
-			'maxlength'		=>	''	
+			'default_value'	=>	''
 		);
 	
 		parent::__construct();
@@ -75,6 +74,17 @@ class wccpf_field_email extends wccpf_product_field {
 	}
 	
 	function render_product_field( $field ) { ob_start(); ?>
+	
+		<?php if( has_action('wccpf/before/field/rendering' ) && has_action('wccpf/after/field/rendering' ) ) : ?>
+		
+			<?php do_action( 'wccpf/before/field/rendering', $field["name"], $field["label"] ); ?>
+			
+			<input type="email" name="<?php echo esc_attr( $field["name"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" maxlength="<?php echo esc_attr( $field["maxlength"] ); ?>" />
+			
+			<?php do_action( 'wccpf/after/field/rendering' ); ?>
+		
+		<?php else : ?>
+		
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
@@ -85,6 +95,9 @@ class wccpf_field_email extends wccpf_product_field {
 				</tr>
 			</tbody>
 		</table>	
+		
+		<?php endif; ?>
+		
 	<?php return ob_get_clean();
 	}
 	
