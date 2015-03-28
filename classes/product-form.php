@@ -54,9 +54,7 @@ class wccpf_product_form {
 				foreach ( $fields as $field ) {
 					$val = $_REQUEST[ $field["name"] ];
 					if( $field["required"] == "yes" ) {
-						error_log("Fields Type : ". $field["type"].", Fields Val : ".$val);
 						$res = apply_filters( 'wccpf/validate/type='.$field["type"], $val );
-						error_log("Validation Status : ".$res);
 						if( !$res ) {
 							wc_add_notice( $field["message"], 'error' );
 							$is_error = false;
@@ -97,10 +95,12 @@ class wccpf_product_form {
 			$all_fields = apply_filters( 'wccpf/load/all_fields', $cart_item['product_id'] );
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {
-					$wccpf_items .= '<dl class="">
-						 <dt class="">'. $field["label"] .' : </dt>
-						 <dd class=""><p>'. WC()->session->get( $cart_item_key.$field["name"] ) .'</p></dd>
-					  </dl>';
+					if( WC()->session->__isset( $cart_item_key.$field["name"] ) && trim( WC()->session->get( $cart_item_key.$field["name"] ) ) ) {
+						$wccpf_items .= '<dl class="">
+							 <dt class="">'. $field["label"] .' : </dt>
+							 <dd class=""><p>'. WC()->session->get( $cart_item_key.$field["name"] ) .'</p></dd>
+						  </dl>';
+					}					
 				}
 			}
 			echo $title.$wccpf_items;
@@ -115,10 +115,12 @@ class wccpf_product_form {
 			$all_fields = apply_filters( 'wccpf/load/all_fields', $cart_item['product_id'] );
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {
-					$wccpf_items .= '<dl class="">
-						 <dt class="">'. $field["label"] .' : </dt>
-						 <dd class=""><p>'. WC()->session->get( $cart_item_key.$field["name"] ) .'</p></dd>
-					  </dl>';
+					if( WC()->session->__isset( $cart_item_key.$field["name"] ) && trim( WC()->session->get( $cart_item_key.$field["name"] ) ) ) {
+						$wccpf_items .= '<dl class="">
+							 <dt class="">'. $field["label"] .' : </dt>
+							 <dd class=""><p>'. WC()->session->get( $cart_item_key.$field["name"] ) .'</p></dd>
+						  </dl>';
+					}
 				}
 			}
 			echo $quantity.$wccpf_items;
@@ -132,7 +134,9 @@ class wccpf_product_form {
 			$all_fields = apply_filters( 'wccpf/load/all_fields', $values["product_id"] );
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {
-					wc_add_order_item_meta( $item_id, $field["label"], WC()->session->get( $cart_item_key.$field["name"] ) );
+					if( WC()->session->__isset( $cart_item_key.$field["name"] ) && trim( WC()->session->get( $cart_item_key.$field["name"] ) ) ) {
+						wc_add_order_item_meta( $item_id, $field["label"], WC()->session->get( $cart_item_key.$field["name"] ) );
+					}
 				}
 			}
 		}			

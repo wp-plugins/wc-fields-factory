@@ -3,7 +3,7 @@ Contributors: mycholan
 Tags: wc fields factory, custom product fields, customize woocommerce product page, add custom fields to woocommerce product page, custom fields validations, custom fields grouping, 
 Requires at least: 3.5
 Tested up to: 4.1.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,3 +60,6 @@ If you ever wanted to get additional informations from customers while adding wo
 
 = 1.0.2 =
 * Issue fixing with "ACF" meta key namespace collition. 
+
+= 1.0.3 =
+* Hiding empty fields from cart table, checkout order review table and order meta.
