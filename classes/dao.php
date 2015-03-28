@@ -10,10 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 class wccpf_dao {
 	/* Namespace for WCCPF related post meta */
-	var $wccpf_key_prefix = "wccpf_field_";
+	var $wccpf_key_prefix = "wccpf_";
 	
 	function __construct() {
-		add_action( 'save_post_wccpf', array( $this, 'save_wccpf_rules' ), 1, 1 );
+		add_action( 'save_post', array( $this, 'save_wccpf_rules' ), 1, 3 );
 		add_filter( 'wccpf/load/rules', array( $this, 'load_wccpf_rules' ), 5, 1 ); 
 		
 		add_filter( 'wccpf/load/products', array( $this, 'load_products' ) );
@@ -72,13 +72,15 @@ class wccpf_dao {
 	function load_wccpf_fields( $pid, $sort = true ) {
 		$fields = array();
 		$meta = get_post_meta( $pid );
-		 foreach ( $meta as $key => $val ) {
-		 	if( preg_match('/wccpf_field_/', $key) ) {
-		 		if( $key != $this->wccpf_key_prefix.'wccpf_group_rules' ) {
+		
+		foreach ( $meta as $key => $val ) {
+		 	if( preg_match('/wccpf_/', $key) ) {
+		 		if( $key != $this->wccpf_key_prefix.'group_rules' ) {
 					$fields[ $key ] = json_decode( $val[0], true );
 				}	
 		 	}
 		 }
+		 
 		 if( $sort ) {
 		 	$this->usort_by_column( $fields, "order" );
 		 }
@@ -104,7 +106,7 @@ class wccpf_dao {
 				$rules_applicable = false;
 						
 				$meta = get_post_meta( $wccpf->ID );
-				$rules = get_post_meta( $wccpf->ID, $this->wccpf_key_prefix.'wccpf_group_rules', true );
+				$rules = get_post_meta( $wccpf->ID, $this->wccpf_key_prefix.'group_rules', true );
 				$rules = json_decode( $rules, true );
 				
 				if( is_array( $rules ) ) {
@@ -115,8 +117,8 @@ class wccpf_dao {
 				
 				if( $rules_applicable ) {
 					foreach ( $meta as $key => $val ) {
-						if( preg_match('/wccpf_field_/', $key) ) {
-							if( $key != $this->wccpf_key_prefix.'wccpf_group_rules' ) {
+						if( preg_match('/wccpf_/', $key) ) {
+							if( $key != $this->wccpf_key_prefix.'group_rules' ) {
 								$fields[ $key ] = json_decode( $val[0], true );
 							}
 						}
@@ -183,13 +185,17 @@ class wccpf_dao {
 	}
 	
 	function load_wccpf_rules( $pid ) {
-	 	return get_post_meta( $pid, $this->wccpf_key_prefix.'wccpf_group_rules', true );
+	 	return get_post_meta( $pid, $this->wccpf_key_prefix.'group_rules', true );
 	}
 
-	function save_wccpf_rules( $pid ) {
-		delete_post_meta( $pid, $this->wccpf_key_prefix.'wccpf_group_rules' );				
-		add_post_meta( $pid, $this->wccpf_key_prefix.'wccpf_group_rules', $_REQUEST["wccpf_group_rules"] );				
-		$this->update_wccpf_fields_order( $pid );
+	function save_wccpf_rules( $post_id, $post, $update ) {		
+		if( $post->post_type != "wccpf" ) {
+			return;
+		}
+		
+		delete_post_meta( $post_id, $this->wccpf_key_prefix.'group_rules' );				
+		add_post_meta( $post_id, $this->wccpf_key_prefix.'group_rules', $_REQUEST["wccpf_group_rules"] );				
+		$this->update_wccpf_fields_order( $post_id );
 		return true;
 	}
 	
