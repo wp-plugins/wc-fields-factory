@@ -41,6 +41,7 @@ If you ever wanted to get additional informations from customers while adding wo
 = Documentation =
 * [Getting Started](http://sarkware.com/wc-fields-factory-a-wordpress-plugin-to-add-custom-fields-to-woocommerce-product-page/)
 * [Customize Rendering Behavior](http://sarkware.com/how-to-change-wc-fields-factory-custom-product-fields-rendering-behavior/)
+* [Overring Product Prices](http://sarkware.com/woocommerce-change-product-price-dynamically-while-adding-to-cart-without-using-plugins/#override-price-wc-fields-factory)
 
 == Installation ==
 1. Ensure you have latest version of WooCommerce plugin installed ( 2.2 or above )
