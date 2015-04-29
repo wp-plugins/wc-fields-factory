@@ -35,6 +35,7 @@ If you ever wanted to get additional informations from customers while adding wo
 * Checkbox
 * Radio 
 * Select
+* Date Picker
 
 = Documentation =
 * [Getting Started](http://sarkware.com/wc-fields-factory-a-wordpress-plugin-to-add-custom-fields-to-woocommerce-product-page/)
