@@ -17,7 +17,8 @@
 					<option value="checkbox">Check Box</option>
 					<option value="radio">Radio Button</option>
 					<option value="select">Select</option>	
-					<option value="datepicker">Date Picker</option>				
+					<option value="datepicker">Date Picker</option>			
+					<option value="colorpicker">Color Picker</option>				
 				</select>
 			</td>
 			<td><input type="text" id="wccpf-field-type-meta-label" value="" placeholder="Label"/></td>

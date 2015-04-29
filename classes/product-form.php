@@ -23,6 +23,7 @@ class wccpf_product_form {
 	function inject_wccpf() {
 		Global $product;
 		$is_datepicker_there = false;
+		$is_colorpicker_there = false;
 		$all_fields = apply_filters( 'wccpf/load/all_fields', $product->id );
 		
 		foreach ( $all_fields as $fields ) {
@@ -39,10 +40,13 @@ class wccpf_product_form {
 					$is_datepicker_there = true;
 				}
 				
+				if( $field["type"] == "colorpicker" ) {
+					$is_colorpicker_there = true;
+				}				
 			}
 		}
 
-		$this->wccpf_front_end_enqueue_scripts( $is_datepicker_there );
+		$this->wccpf_front_end_enqueue_scripts( $is_datepicker_there, $is_colorpicker_there );
 	}
 	
 	/**
@@ -150,7 +154,7 @@ class wccpf_product_form {
 		}			
 	}
 	
-	function wccpf_front_end_enqueue_scripts( $is_datepicker_there ) {
+	function wccpf_front_end_enqueue_scripts( $is_datepicker_there, $is_colorpicker_there ) {
 		if( is_shop() || is_product() ) {			
 			wp_register_style( 'wccpf-font-end-style', wccpf()->settings['dir'] . 'css/wccpf-front-end.css' );
 			wp_enqueue_style( array( 'wccpf-font-end-style' ) );			
@@ -161,6 +165,12 @@ class wccpf_product_form {
 				wp_enqueue_script( 'jquery-ui-datepicker' );
 			}
 			
+			if( $is_colorpicker_there ) {
+				wp_register_script( 'wccpf-color-picker', wccpf()->settings['dir'] . 'js/jqColorPicker.js' );
+				wp_register_script( 'wccpf-colors', wccpf()->settings['dir'] . 'js/colors.js' );
+				wp_enqueue_script( 'wccpf-colors' );
+				wp_enqueue_script( 'wccpf-color-picker' );
+			}			
 		}
 	}
 } 
