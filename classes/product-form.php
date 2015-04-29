@@ -22,6 +22,7 @@ class wccpf_product_form {
 	
 	function inject_wccpf() {
 		Global $product;
+		$is_datepicker_there = false;
 		$all_fields = apply_filters( 'wccpf/load/all_fields', $product->id );
 		
 		foreach ( $all_fields as $fields ) {
@@ -33,10 +34,15 @@ class wccpf_product_form {
 					$html = apply_filters( 'wccpf/before/fields/rendering', $field, $html );
 				}
 				echo $html;
+				
+				if( $field["type"] == "datepicker" ) {
+					$is_datepicker_there = true;
+				}
+				
 			}
 		}
 
-		$this->wccpf_front_end_enqueue_scripts();
+		$this->wccpf_front_end_enqueue_scripts( $is_datepicker_there );
 	}
 	
 	/**
@@ -144,10 +150,17 @@ class wccpf_product_form {
 		}			
 	}
 	
-	function wccpf_front_end_enqueue_scripts() {
-		if( is_shop() || is_product() ) {
+	function wccpf_front_end_enqueue_scripts( $is_datepicker_there ) {
+		if( is_shop() || is_product() ) {			
 			wp_register_style( 'wccpf-font-end-style', wccpf()->settings['dir'] . 'css/wccpf-front-end.css' );
-			wp_enqueue_style( array( 'wccpf-font-end-style' ) );
+			wp_enqueue_style( array( 'wccpf-font-end-style' ) );			
+			
+			if( $is_datepicker_there ) {
+				wp_enqueue_style( 'wccpf-jquery-ui-css','http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css',false,"1.9.0",false);
+				wp_enqueue_script( 'jquery-ui-core' );
+				wp_enqueue_script( 'jquery-ui-datepicker' );
+			}
+			
 		}
 	}
 } 

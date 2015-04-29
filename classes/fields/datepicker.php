@@ -2,16 +2,16 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-class wccpf_field_email extends wccpf_product_field {
+class wccpf_field_datepicker extends wccpf_product_field {
 	
 	function __construct() {
-		$this->name 		= 'email';
-		$this->label 		= "Email";
+		$this->name 		= 'datepicker';
+		$this->label 		= "Date Picker";
 		$this->required 	= false;
 		$this->message 		= "This field can't be Empty";
-		$this->params 		= array(
-			'placeholder'	=>	'',
-			'default_value'	=>	''
+		$this->params 		= array(				
+				'placeholder'	=>	'',
+				'date_format'	=>	''
 		);
 	
 		parent::__construct();
@@ -59,12 +59,12 @@ class wccpf_field_email extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
-					<label for="post_type">Default Value</label>
-					<p class="description">Default value for this Text Box</p>
+					<label for="post_type">Date Format</label>
+					<p class="description">The Date Format that will be used display & save the value</p>
 				</td>
 				<td>
-					<div class="wccpf-field-types-meta" data-type="text" data-param="default_value">
-						<input type="text" id="wccpf-field-type-meta-default_value" value="" />
+					<div class="wccpf-field-types-meta" data-type="text" data-param="date_format">
+						<input type="text" id="wccpf-field-type-meta-date_format" value="" placeholder="dd-mm-yy"/>
 					</div>
 				</td>
 			</tr>
@@ -74,12 +74,12 @@ class wccpf_field_email extends wccpf_product_field {
 	}
 	
 	function render_product_field( $field ) { ob_start(); ?>
-	
+		
 		<?php if( has_action('wccpf/before/field/rendering' ) && has_action('wccpf/after/field/rendering' ) ) : ?>
 		
 			<?php do_action( 'wccpf/before/field/rendering', $field["name"], $field["label"] ); ?>
 			
-			<input type="email" name="<?php echo esc_attr( $field["name"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" />
+			<input type="text" name="<?php echo esc_attr( $field["name"] ); ?>" class="wccpf_datepicker_field" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" value="" />
 			
 			<?php do_action( 'wccpf/after/field/rendering' ); ?>
 		
@@ -90,7 +90,7 @@ class wccpf_field_email extends wccpf_product_field {
 				<tr>
 					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
 					<td class="wccpf_value">
-						<input type="email" name="<?php echo esc_attr( $field["name"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" />
+						<input type="text" name="<?php echo esc_attr( $field["name"] ); ?>" class="wccpf_datepicker_field" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" value="" />
 					</td>
 				</tr>
 			</tbody>
@@ -98,19 +98,29 @@ class wccpf_field_email extends wccpf_product_field {
 		
 		<?php endif; ?>
 		
-	<?php return ob_get_clean();
+		<script type="text/javascript">
+			var $ = jQuery;
+			$( document ).ready(function() {
+				<?php $dformat = isset( $field["date_format"] ) ? 'dateFormat:'.esc_attr( $field["date_format"] ) : ''; ?>
+				$( "input[name=<?php echo esc_attr( $field["name"] ); ?>]" ).datepicker({
+					<?php if( $field["date_format"] != "" ){
+						echo "dateFormat:'".esc_attr( $field["date_format"] )."'";
+					} else {
+						echo "dateFormat:'dd-mm-yy'";
+					} ?>					 
+				});
+			});
+		</script>
+		
+		<?php 
+		return ob_get_clean();
 	}
 	
 	function validate( $val ) {
-		if( !filter_var( $val, FILTER_VALIDATE_EMAIL ) === false ) { 
-			return true; 
-		} else { 
-			return false; 
-		}
+		return ( isset( $val ) && !empty( $val ) ) ? true : false;
 	}
-	
 }
 
-new wccpf_field_email();
+new wccpf_field_datepicker();
 
 ?>
