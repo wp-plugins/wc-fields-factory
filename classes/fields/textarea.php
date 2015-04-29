@@ -114,8 +114,8 @@ class wccpf_field_textarea extends wccpf_product_field {
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
-					<td class="value">
+					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
+					<td class="wccpf_value">
 						<textarea name="<?php echo esc_attr( $field["name"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" rows="<?php echo esc_attr( $field["rows"] ); ?>" maxlength="<?php echo esc_attr( $field["maxlength"] ); ?>"><?php echo esc_attr( $field["default_value"] ); ?></textarea>
 					</td>
 				</tr>

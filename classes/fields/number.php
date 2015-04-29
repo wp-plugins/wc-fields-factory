@@ -123,8 +123,8 @@ class wccpf_field_number extends wccpf_product_field {
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="label"><label for="<?php echo esc_attr( $field["name"] ) ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
-					<td class="value">
+					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ) ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
+					<td class="wccpf_value">
 						<input type="number" name="<?php echo esc_attr( $field["name"] ); ?>" value="<?php echo esc_attr( $field["default_value"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" min="<?php echo esc_attr( $field["min"] ); ?>" max="<?php echo esc_attr( $field["max"] ); ?>" step="<?php echo esc_attr( $field["step"] ); ?>"/>
 					</td>
 				</tr>
@@ -138,7 +138,11 @@ class wccpf_field_number extends wccpf_product_field {
 	}
 	
 	function validate( $val ) {
-		return ( isset( $val ) && !empty( $val ) ) ? true : false;
+		if( is_numeric( $val ) ) { 
+			return true; 
+		} else {
+			return false;
+		}
 	}
 	
 }

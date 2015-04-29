@@ -4,16 +4,16 @@ table.wccpf_fields_table {
 	border-collapse: collapse;
 }
 
-table.wccpf_fields_table td.label {
+table.wccpf_fields_table td.wccpf_label {
 	width:100px;
 }
 
-table.wccpf_fields_table td.value input[type=text],
-table.wccpf_fields_table td.value input[type=number],
-table.wccpf_fields_table td.value input[type=email],
-table.wccpf_fields_table td.value input[type=password],
-table.wccpf_fields_table td.value textarea,
-table.wccpf_fields_table td.value select {
+table.wccpf_fields_table td.wccpf_value input[type=text],
+table.wccpf_fields_table td.wccpf_value input[type=number],
+table.wccpf_fields_table td.wccpf_value input[type=email],
+table.wccpf_fields_table td.wccpf_value input[type=password],
+table.wccpf_fields_table td.wccpf_value textarea,
+table.wccpf_fields_table td.wccpf_value select {
 	width: 100%;
 	padding: 5px;
 	height: auto;
@@ -31,7 +31,7 @@ table.wccpf_fields_table td.value select {
 	box-sizing: border-box;
 }
 
-table.wccpf_fields_table td.value textarea {
+table.wccpf_fields_table td.wccpf_value textarea {
 	resize: vertical;
 }
 

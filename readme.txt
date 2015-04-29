@@ -3,8 +3,8 @@ Contributors: mycholan
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=U3ENPZS5CYMH4
 Tags: wc fields factory, custom product fields, customize woocommerce product page, add custom fields to woocommerce product page, custom fields validations, custom fields grouping, 
 Requires at least: 3.5
-Tested up to: 4.1.1
-Stable tag: 1.0.3
+Tested up to: 4.2.1
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,3 +64,8 @@ If you ever wanted to get additional informations from customers while adding wo
 
 = 1.0.3 =
 * Hiding empty fields from cart table, checkout order review table and order meta.
+
+= 1.0.4 =
+* Validation issue fixed.
+* Issue fixed ( warning log for each non mandatory custom fields ).
+* Some css changes ( only class name ) to avoid collision with Bootstrap. 

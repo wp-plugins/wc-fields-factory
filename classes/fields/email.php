@@ -88,8 +88,8 @@ class wccpf_field_email extends wccpf_product_field {
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
-					<td class="value">
+					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
+					<td class="wccpf_value">
 						<input type="email" name="<?php echo esc_attr( $field["name"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" maxlength="<?php echo esc_attr( $field["maxlength"] ); ?>" />
 					</td>
 				</tr>
@@ -102,7 +102,11 @@ class wccpf_field_email extends wccpf_product_field {
 	}
 	
 	function validate( $val ) {
-		return ereg("^[A-Za-z0-9\.|-|_]*[@]{1}[A-Za-z0-9\.|-|_]*[.]{1}[a-z]{2,5}$", $val );
+		if( !filter_var( $val, FILTER_VALIDATE_EMAIL ) === false ) { 
+			return true; 
+		} else { 
+			return false; 
+		}
 	}
 	
 }

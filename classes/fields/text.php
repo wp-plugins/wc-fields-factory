@@ -100,8 +100,8 @@ class wccpf_field_text extends wccpf_product_field {
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
-					<td class="value">
+					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
+					<td class="wccpf_value">
 						<input type="text" name="<?php echo esc_attr( $field["name"] ); ?>" value="<?php echo esc_attr( $field["default_value"] ); ?>" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" maxlength="<?php echo esc_attr( $field["maxlength"] ); ?>" />
 					</td>
 				</tr>
