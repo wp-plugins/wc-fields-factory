@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: wc fields factory, custom product fields, customize woocommerce product page, add custom fields to woocommerce product page, custom fields validations, custom fields grouping, 
 Requires at least: 3.5
 Tested up to: 4.2.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,3 +78,9 @@ If you ever wanted to get additional informations from customers while adding wo
 
 = 1.1.1 =
 * Color picker field type added
+
+= 1.1.2 =
+* Removed unecessory hooks ( 'woocommerce_add_to_cart', 'woocommerce_cart_item_name' and 'woocommerce_checkout_cart_item_quantity' ) 
+  yes they no longer required.
+* Now custom fields data has been saved in session through 'woocommerce_add_cart_item_data' hook
+* Custom fields rendered on cart & checkout page using 'woocommerce_get_item_data' ( actually rendered via 'cart-item-data.php' template )  
