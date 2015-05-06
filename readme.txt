@@ -80,7 +80,7 @@ If you ever wanted to get additional informations from customers while adding wo
 * Color picker field type added
 
 = 1.1.2 =
-* Removed unecessory hooks ( 'woocommerce_add_to_cart', 'woocommerce_cart_item_name' and 'woocommerce_checkout_cart_item_quantity' ) 
+* Removed unnecessary hooks ( 'woocommerce_add_to_cart', 'woocommerce_cart_item_name' and 'woocommerce_checkout_cart_item_quantity' ) 
   yes they no longer required.
 * Now custom fields data has been saved in session through 'woocommerce_add_cart_item_data' hook
 * Custom fields rendered on cart & checkout page using 'woocommerce_get_item_data' ( actually rendered via 'cart-item-data.php' template )  
