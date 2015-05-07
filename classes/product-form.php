@@ -116,8 +116,8 @@ class wccpf_product_form {
 			$all_fields = apply_filters( 'wccpf/load/all_fields', $values["product_id"] );
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {
-					if( WC()->session->__isset( $cart_item_key.$field["name"] ) && trim( WC()->session->get( $cart_item_key.$field["name"] ) ) ) {
-						wc_add_order_item_meta( $item_id, $field["label"], WC()->session->get( $cart_item_key.$field["name"] ) );
+					if( WC()->session->__isset( $values['wccpf_unique_key'].$field["name"] ) && trim( WC()->session->get( $values['wccpf_unique_key'].$field["name"] ) ) ) {
+						wc_add_order_item_meta( $item_id, $field["label"], WC()->session->get( $values['wccpf_unique_key'].$field["name"] ) );
 					}
 				}
 			}
