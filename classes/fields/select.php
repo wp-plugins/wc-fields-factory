@@ -40,7 +40,7 @@ class wccpf_field_select extends wccpf_product_field {
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="text" data-param="message">
-						<input type="text" id="wccpf-field-type-meta-message" value="<?php echo $this->message; ?>" />						
+						<input type="text" id="wccpf-field-type-meta-message" value="<?php echo esc_attr( $this->message ); ?>" />						
 					</div>
 				</td>
 			</tr>
@@ -90,7 +90,7 @@ class wccpf_field_select extends wccpf_product_field {
 					$attr = '';
 				}
 				$key_val = explode( "|", $choice );
-				echo '<option value="'. esc_attr( trim( $key_val[0] ) ) .'" '. $attr .'>'. esc_attr( trim( $key_val[1] ) ) .'</option>';
+				echo '<option value="'. esc_attr( trim( $key_val[0] ) ) .'" '. $attr .'>'. esc_html( trim( $key_val[1] ) ) .'</option>';
 			} ?>		
 			</select>
 			
@@ -101,7 +101,7 @@ class wccpf_field_select extends wccpf_product_field {
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
+					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_html( $field["label"] ); ?></label></td>
 					<td class="wccpf_value">
 						<select name="<?php echo esc_attr( $field["name"] ); ?>">
 						<?php 							
@@ -114,7 +114,7 @@ class wccpf_field_select extends wccpf_product_field {
 								$attr = '';
 							}
 							$key_val = explode( "|", $choice );
-							echo '<option value="'. esc_attr( trim( $key_val[0] ) ) .'" '. $attr .'>'. esc_attr( trim( $key_val[1] ) ) .'</option>';
+							echo '<option value="'. esc_attr( trim( $key_val[0] ) ) .'" '. $attr .'>'. esc_html( trim( $key_val[1] ) ) .'</option>';
 						} ?>		
 						</select>
 					</td>

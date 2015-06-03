@@ -39,7 +39,7 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="text" data-param="message">
-						<input type="text" id="wccpf-field-type-meta-message" value="<?php echo $this->message; ?>" />						
+						<input type="text" id="wccpf-field-type-meta-message" value="<?php echo esc_attr( $this->message ); ?>" />						
 					</div>
 				</td>
 			</tr>
@@ -75,7 +75,7 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 		<table class="wccpf_fields_table variations" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_attr( $field["label"] ); ?></label></td>
+					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_html( $field["label"] ); ?></label></td>
 					<td class="wccpf_value">
 						<input type="text" name="<?php echo esc_attr( $field["name"] ); ?>" class="color" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" value="" />
 					</td>

@@ -3,7 +3,7 @@
 Plugin Name: WC Fields Factory
 Plugin URI: http://sarkware.com/wc-fields-factory-a-wordpress-plugin-to-add-custom-fields-to-woocommerce-product-page/
 Description: It allows you to add custom fields to your woocommerce product page. You can add custom fields and validations without tweaking any of your theme's code & templates, It also allows you to group the fields and add them to particular products or for particular product categories. Supported field types are text, numbers, email, textarea, checkbox, radio and select.
-Version: 1.1.3
+Version: 1.1.4
 Author: Saravana Kumar K
 Author URI: http://www.iamsark.com/
 License: GPL
@@ -25,7 +25,7 @@ class wccpf {
 		$this->settings = array(
 			'path'				=> plugin_dir_path( __FILE__ ),
 			'dir'				=> plugin_dir_url( __FILE__ ),
-			'version'			=> '1.1.2'
+			'version'			=> '1.1.4'
 		);
 		
 		add_action( 'init', array( $this, 'init' ), 1 );

@@ -75,7 +75,7 @@ class wccpf_dao {
 		
 		foreach ( $meta as $key => $val ) {
 		 	if( preg_match('/wccpf_/', $key) ) {
-		 		if( $key != $this->wccpf_key_prefix.'group_rules' ) {
+		 		if( $key != $this->wccpf_key_prefix.'group_rules' ) {		 			
 					$fields[ $key ] = json_decode( $val[0], true );
 				}	
 		 	}
@@ -84,6 +84,7 @@ class wccpf_dao {
 		 if( $sort ) {
 		 	$this->usort_by_column( $fields, "order" );
 		 }
+		 
 		 return $fields;
 	}
 	
@@ -213,11 +214,11 @@ class wccpf_dao {
 	}
 	
 	function save_wccpf_field( $pid, $payload ) {	
-		return add_post_meta( $pid, $this->wccpf_key_prefix.$payload["name"], json_encode( $payload ) );
+		return add_post_meta( $pid, $this->wccpf_key_prefix.$payload["name"], wp_slash( json_encode( $payload ) ) );
 	}
 	
-	function update_wccpf_field( $pid, $payload ) {
-		return update_post_meta( $pid, $payload["key"], json_encode( $payload ) );
+	function update_wccpf_field( $pid, $payload ) {		
+		return update_post_meta( $pid, $payload["key"], wp_slash( json_encode( $payload ) ) );
 	}
 	
 	function remove_wccpf_field( $pid, $mkey ) {
