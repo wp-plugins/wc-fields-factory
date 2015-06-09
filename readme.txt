@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: wc fields factory, custom product fields, customize woocommerce product page, add custom fields to woocommerce product page, custom fields validations, custom fields grouping, 
 Requires at least: 3.5
 Tested up to: 4.2.2
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,4 +89,10 @@ If you ever wanted to get additional informations from customers while adding wo
 * Order meta ( as well as email ) not added Issue fixed   
 
 = 1.1.4 =
-* Internationalization support.   
+* utf-8 encoding issue fixed
+* Internationalization support.
+
+= 1.1.5 =
+* Select field with variable product - issue fixed
+* Order conflict while updating fields - issue fixed
+* Newline character ( for select, checkbox and radio ) - issue fixed     

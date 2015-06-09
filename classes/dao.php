@@ -213,7 +213,7 @@ class wccpf_dao {
 		return get_post_meta( $pid, $mkey, true );
 	}
 	
-	function save_wccpf_field( $pid, $payload ) {	
+	function save_wccpf_field( $pid, $payload ) {		
 		return add_post_meta( $pid, $this->wccpf_key_prefix.$payload["name"], wp_slash( json_encode( $payload ) ) );
 	}
 	

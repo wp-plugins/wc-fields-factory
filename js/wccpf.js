@@ -141,7 +141,10 @@ var wccpf = function() {
 		
 		var me = this;		
 		$("#wccpf-field-types-meta-body div.wccpf-field-types-meta").each(function() {
-			if( $(this).attr("data-type") != "radio" ) {
+			if( $(this).attr("data-param") == "choices" || $(this).attr("data-param") == "default_value" ) {
+				me.activeField[ $(this).attr("data-param") ] = me.activeField[ $(this).attr("data-param") ].replace( /;/g, "\n" );
+			}
+			if( $(this).attr("data-type") != "radio" ) {				
 				$("#wccpf-field-type-meta-"+$(this).attr("data-param")).val( me.activeField[ $(this).attr("data-param") ] );
 			} else {
 				$("input[name=wccpf-field-type-meta-"+ $(this).attr("data-param") +"][value="+ me.activeField[ $(this).attr("data-param") ] +"]" ).prop( 'checked', true );	
@@ -164,15 +167,19 @@ var wccpf = function() {
 		$("#wccpf-field-types-meta-body div.wccpf-field-types-meta").each(function() {
 			if( $(this).attr("data-type") != "radio" ) {
 				payload[ $(this).attr("data-param") ] = $("#wccpf-field-type-meta-"+$(this).attr("data-param")).val().replace(/['"]/g, '');
+				if( $(this).attr("data-param") == "choices" || $(this).attr("data-param") == "default_value" ) {
+					payload[ $(this).attr("data-param") ] = payload[ $(this).attr("data-param") ].replace( /\n/g, ";" );
+				}				
 			} else {
-				payload[ $(this).attr("data-param") ] = $("input[name=wccpf-field-type-meta-"+ $(this).attr("data-param") +"]:checked" ).val().replace(/['"]/g, '');
+				payload[ $(this).attr("data-param") ] = $("input[name=wccpf-field-type-meta-"+ $(this).attr("data-param") +"]:checked" ).val().replace(/['"]/g, '');				
 			}
 		});	
 		
-		if( $("#wccpf_fields_factory").attr("action") == "PUT" ) {
-			payload["key"] = this.activeField["key"];
-		} else {
+		if( $("#wccpf_fields_factory").attr("action") == "POST" ) {
 			payload["order"] = $('.wccpf-meta-row').length;
+		} else if( $("#wccpf_fields_factory").attr("action") == "PUT" ) {
+			payload["key"] = this.activeField["key"];
+			payload["order"] = $('input[name='+ this.activeField["key"] +'-order').val();
 		}
 		
 		this.prepareRequest( $("#wccpf_fields_factory").attr("action"), "wccpf_fields", payload );
@@ -276,20 +283,19 @@ var wccpf = function() {
 					this.dock( "single", _target );
 				}				
 			} else {
-				if( !$("#wccpf-fields-set").is(':empty') ) {
+				if(this.response.status ) {
+					/* Set Fields Factory to POST mode, on successfull completeion of any operation */
 					$("#wccpf-empty-field-set").hide();
-				} else {
-					$("#wccpf-empty-field-set").show();
+					$("#wccpf-field-factory-footer").hide();
+					$(".wccpf-add-new-field").html("+ Add Field");
+					$("#wccpf_fields_factory").attr("action","POST");					
 				}				
+				if( this.request.request == "DELETE" ) {					
+					if( $("#wccpf-fields-set:empty") ) {					
+						$("#wccpf-empty-field-set").show();
+					}
+				}								
 				this.reloadHtml( $("#wccpf-fields-set") );				
-				if( this.request.request == "PUT" ) {
-					/* Set Fields Factory to POST mode, on successfull completeion of update operation */
-					if(this.response.status ) {
-						$(".wccpf-add-new-field").html("+ Add Field");
-						$("#wccpf_fields_factory").attr("action","POST");
-						$("#wccpf-field-factory-footer").hide();
-					}					
-				}
 				$("#wccpf-field-type-meta-label").val("");
 				$("#wccpf-field-type-meta-name").val("");				
 				$("#wccpf-field-type-meta-type").trigger("change");
