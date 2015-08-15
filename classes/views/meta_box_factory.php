@@ -10,20 +10,21 @@
 		<tr>
 			<td>
 				<select class="select" id="wccpf-field-type-meta-type">
-					<option value="text">Text</option>
-					<option value="number">Number</option>
-					<option value="email">Email</option>
-					<option value="textarea">Text Area</option>
-					<option value="checkbox">Check Box</option>
-					<option value="radio">Radio Button</option>
-					<option value="select">Select</option>	
-					<option value="datepicker">Date Picker</option>			
-					<option value="colorpicker">Color Picker</option>				
+					<option value="text"><?php _e( 'Text', 'wc-fields-factory' ); ?></option>
+					<option value="number"><?php _e( 'Number', 'wc-fields-factory' ); ?></option>
+					<option value="email"><?php _e( 'Email', 'wc-fields-factory' ); ?></option>
+					<option value="textarea"><?php _e( 'Text Area', 'wc-fields-factory' ); ?></option>
+					<option value="checkbox"><?php _e( 'Check Box', 'wc-fields-factory' ); ?></option>
+					<option value="radio"><?php _e( 'Radio Button', 'wc-fields-factory' ); ?></option>
+					<option value="select"><?php _e( 'Select', 'wc-fields-factory' ); ?></option>	
+					<option value="datepicker"><?php _e( 'Date Picker', 'wc-fields-factory' ); ?></option>			
+					<option value="colorpicker"><?php _e( 'Color Picker', 'wc-fields-factory' ); ?></option>	
+					<option value="file"><?php _e( 'File', 'wc-fields-factory' ); ?></option>			
 				</select>
 			</td>
 			<td><input type="text" id="wccpf-field-type-meta-label" value="" placeholder="Label"/></td>
 			<td><input type="text" id="wccpf-field-type-meta-name" value="" placeholder="Name" readonly/></td>
-			<td><a href="#" class="wccpf-add-new-field button button-primary">+ Add Field</a></td>
+			<td><a href="#" class="wccpf-add-new-field button button-primary">+ <?php _e( 'Add Field', 'wc-fields-factory' ); ?></a></td>
 		</tr>
 	</table>
 
@@ -36,8 +37,8 @@
 				<tr>
 					<td></td>
 					<td style="text-align: right;">
-						<a href="#" class="wccpf-cancel-update-field-btn button">Cancel</a>
-						<a href="#" data-key="" class="button wccpf-meta-option-delete">Delete</a>
+						<a href="#" class="wccpf-cancel-update-field-btn button"><?php _e( 'Cancel', 'wc-fields-factory' ); ?></a>
+						<a href="#" data-key="" class="button wccpf-meta-option-delete"><?php _e( 'Delete', 'wc-fields-factory' ); ?></a>
 					</td>
 				</tr>
 			</tfoot>

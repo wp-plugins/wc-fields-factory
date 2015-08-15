@@ -60,13 +60,17 @@ class wccpf_product_form {
 			$all_fields = apply_filters( 'wccpf/load/all_fields', $pid );
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {
-					$val = $_REQUEST[ $field["name"] ];					
-					if( $field["required"] == "yes" ) {			
-						$res = apply_filters( 'wccpf/validate/type='.$field["type"], $val );			
-						if( $res == 0 ) {
-							$is_passed = false;							
-							wc_add_notice( $field["message"], 'error' );							
+					$val = $_REQUEST[ $field["name"] ];	
+					if( $field["type"] != "file" ) {				
+						if( $field["required"] == "yes" ) {			
+							$res = apply_filters( 'wccpf/validate/type='.$field["type"], $val );							
 						}
+					} else {						
+						$res = apply_filters( 'wccpf/upload/validate', $_FILES[ $field["name"] ], $field['filetypes'], $field["required"] );												
+					}
+					if( $res == 0 ) {
+						$is_passed = false;
+						wc_add_notice( $field["message"], 'error' );
 					}
 				}
 			}
@@ -82,12 +86,21 @@ class wccpf_product_form {
 		if( $product_id ) {
 			$all_fields = apply_filters( 'wccpf/load/all_fields', $product_id );
 			foreach ( $all_fields as $fields ) {
-				foreach ( $fields as $field ) {
-					if( isset( $_REQUEST[ $field["name"] ] ) ) {
-						if( $field["type"] != "checkbox" ) {
+				foreach ( $fields as $field ) {					
+					if( isset( $_REQUEST[ $field["name"] ] ) || isset( $_FILES[ $field["name"] ] ) ) {
+						if( $field["type"] != "checkbox" && $field["type"] != "file" ) {
 							WC()->session->set( $unique_cart_item_key.$field["name"], $_REQUEST[ $field["name"] ] );
-						} else {
+						} else if( $field["type"] == "checkbox" ) {
 							WC()->session->set( $unique_cart_item_key.$field["name"], implode( ", ", $_REQUEST[ $field["name"] ] ) );
+						} else {									
+							/* Handle the file upload */
+							$res = apply_filters( 'wccpf/upload/type=file', $_FILES[ $field["name"] ] );
+							if( !isset( $res['error'] ) ) {								
+								WC()->session->set( $unique_cart_item_key.$field["name"], json_encode( $res ) );
+								do_action( 'wccpf/uploaded/file', $res );
+							} else {
+								wc_add_wp_error_notices( $field["message"], 'error' );
+							}												
 						}
 					}
 				}
@@ -96,18 +109,28 @@ class wccpf_product_form {
 		return $cart_item_data;
 	}
 
-	function render_wccpf_data( $dummy, $cart_item = null ) {		
+	function render_wccpf_data( $cart_data, $cart_item = null ) {		
 		$wccpf_items = array();
+		/* Woo 2.4.2 updates */
+		if( !empty( $cart_data ) ) {
+			$wccpf_items = $cart_data;
+		}
 		if( isset( $cart_item['product_id'] ) && isset( $cart_item['wccpf_unique_key'] ) ) {			
 			$all_fields = apply_filters( 'wccpf/load/all_fields', $cart_item['product_id'] );
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {
-					if( WC()->session->__isset( $cart_item['wccpf_unique_key'].$field["name"] ) && trim( WC()->session->get( $cart_item['wccpf_unique_key'].$field["name"] ) ) ) {						
-						$wccpf_items[] = array( "name" => $field["label"], "value" => WC()->session->get( $cart_item['wccpf_unique_key'].$field["name"] ) );					
+					if( WC()->session->__isset( $cart_item['wccpf_unique_key'].$field["name"] ) && trim( WC()->session->get( $cart_item['wccpf_unique_key'].$field["name"] ) ) ) {
+						if( $field["type"] == "file" ) {
+							$fobj = json_decode( WC()->session->get( $cart_item['wccpf_unique_key'].$field["name"] ), true );
+							$path_parts = pathinfo( $fobj['file'] );
+							$wccpf_items[] = array( "name" => $field["label"], "value" => $path_parts["basename"] );
+						} else {
+							$wccpf_items[] = array( "name" => $field["label"], "value" => WC()->session->get( $cart_item['wccpf_unique_key'].$field["name"] ) );
+						}
 					}					
 				}
 			}			
-		}
+		}		
 		return $wccpf_items;
 	}
 	
@@ -117,7 +140,12 @@ class wccpf_product_form {
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {
 					if( WC()->session->__isset( $values['wccpf_unique_key'].$field["name"] ) && trim( WC()->session->get( $values['wccpf_unique_key'].$field["name"] ) ) ) {
-						wc_add_order_item_meta( $item_id, $field["label"], WC()->session->get( $values['wccpf_unique_key'].$field["name"] ) );
+						if( $field["type"] == "file" ) {
+							$fobj = json_decode( WC()->session->get( $values['wccpf_unique_key'].$field["name"] ), true );
+							wc_add_order_item_meta( $item_id, $field["label"], $fobj["url"] );
+						} else {
+							wc_add_order_item_meta( $item_id, $field["label"], WC()->session->get( $values['wccpf_unique_key'].$field["name"] ) );
+						}						
 					}
 				}
 			}

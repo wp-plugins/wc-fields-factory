@@ -21,14 +21,14 @@ class wccpf_field_checkbox extends wccpf_product_field {
 	function render_admin_field() { ob_start(); ?>
 			<tr>
 				<td class="summary">
-					<label for="post_type">Required</label>
-					<p class="description">Is this field Mandatory</p>
+					<label for="post_type"><?php _e( 'Required', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Is this field Mandatory', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="radio" data-param="required">
 						<ul class="wccpf-field-layout-horizontal">
-							<li><label><input type="radio" name="wccpf-field-type-meta-required" value="yes" /> Yes</label></li>
-							<li><label><input type="radio" name="wccpf-field-type-meta-required" value="no" checked/> No</label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-required" value="yes" /> <?php _e( 'Yes', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-required" value="no" checked/> <?php _e( 'No', 'wc-fields-factory' ); ?></label></li>
 						</ul>						
 					</div>
 				</td>
@@ -36,8 +36,8 @@ class wccpf_field_checkbox extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
-					<label for="post_type">Message</label>
-					<p class="description">Message to display whenever the validation failed</p>
+					<label for="post_type"><?php _e( 'Message', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Message to display whenever the validation failed', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="text" data-param="message">
@@ -48,8 +48,8 @@ class wccpf_field_checkbox extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
-					<label for="post_type">Options</label>
-					<p class="description">Enter each options on a new line like this<br/><br/>red|Red<br/>blue|Blue</p>
+					<label for="post_type"><?php _e( 'Options', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Enter each options on a new line like this', 'wc-fields-factory' ); ?><br/><br/>red|Red<br/>blue|Blue</p>
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="textarea" data-param="choices">
@@ -60,8 +60,8 @@ class wccpf_field_checkbox extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
-					<label for="post_type">Default Options</label>
-					<p class="description">Enter each default options on a new line</p>
+					<label for="post_type"><?php _e( 'Default Options', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Enter each default options on a new line', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="textarea" data-param="default_value">
@@ -72,14 +72,14 @@ class wccpf_field_checkbox extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
-					<label for="post_type">Layout</label>
-					<p class="description">Row wise (or) Column wise</p>
+					<label for="post_type"><?php _e( 'Layout', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Row wise (or) Column wise', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="radio" data-param="layout">
 						<ul class="wccpf-field-layout-horizontal">
-							<li><label><input type="radio" name="wccpf-field-type-meta-layout" value="horizontal" checked /> Horizontal</label></li>
-							<li><label><input type="radio" name="wccpf-field-type-meta-layout" value="vertical" /> Vertical</label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-layout" value="horizontal" checked /> <?php _e( 'Horizontal', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-layout" value="vertical" /> <?php _e( 'Vertical', 'wc-fields-factory' ); ?></label></li>
 						</ul>						
 					</div>
 				</td>

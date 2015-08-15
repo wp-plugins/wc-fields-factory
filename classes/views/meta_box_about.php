@@ -12,7 +12,7 @@ $path = apply_filters('acf/get_info', 'path');
 
 	<div class="wp-box">
 		<div class="inner">
-			<h2>WC Custom Product Fields <?php echo $version; ?></h2>
+			<h2>WC Fields Factory <?php echo $version; ?></h2>
 						
 			<h3>Resources</h3>
 			<ul>

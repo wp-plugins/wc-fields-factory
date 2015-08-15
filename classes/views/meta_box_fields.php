@@ -17,13 +17,13 @@ $conditional_logic_rule = array(
 	'value' => ''
 );
 
-$error_field_type = '<b>' . __('Error', 'acf') . '</b> ' . __('Field type does not exist', 'acf');
+$error_field_type = '<b>' . __( 'Error', 'wc-fields-factory' ) . '</b> ' . __( 'Field type does not exist', 'wc-fields-factory' );
 
 ?>
 
 <!-- Hidden Fields -->
 <div style="display:none;">
-	<input type="hidden" name="acf_nonce" value="<?php echo wp_create_nonce( 'field_group' ); ?>" />
+	<input type="hidden" name="wccpf_nonce" value="<?php echo wp_create_nonce( 'field_group' ); ?>" />
 </div>
 <!-- / Hidden Fields -->
 
@@ -32,10 +32,10 @@ $error_field_type = '<b>' . __('Error', 'acf') . '</b> ' . __('Field type does n
 	<table class="wccpf_table">
 		<thead>
 			<tr>
-				<th>Field Order</th>
-				<th>Field Label</th>
-				<th>Field Name</th>
-				<th>Field Type</th>			
+				<th><?php _e( 'Field Order', 'wc-fields-factory' ); ?></th>
+				<th><?php _e( 'Field Label', 'wc-fields-factory' ); ?></th>
+				<th><?php _e( 'Field Name', 'wc-fields-factory' ); ?></th>
+				<th><?php _e( 'Field Type', 'wc-fields-factory' ); ?></th>			
 			</tr>
 		</thead>
 	</table>
@@ -58,7 +58,7 @@ $error_field_type = '<b>' . __('Error', 'acf') . '</b> ' . __('Field type does n
 	</div>
 	
 	<div id="wccpf-empty-field-set" style="display:<?php echo count( $fields ) < 1 ? 'block' : 'none'; ?>">
-		Zero product fields.! Use the <strong>Fields Factory</strong> form to create your custom product fields.!
+		<?php _e( 'Zero product fields.! Use the', 'wc-fields-factory' ); ?> <strong><?php _e( 'Fields Factory', 'wc-fields-factory' ); ?></strong> <?php _e( 'form to create your custom product fields.!', 'wc-fields-factory' ); ?>
 	</div>	
 	
 </div>

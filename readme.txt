@@ -3,8 +3,8 @@ Contributors: mycholan
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=U3ENPZS5CYMH4
 Tags: wc fields factory, custom product fields, customize woocommerce product page, add custom fields to woocommerce product page, custom fields validations, custom fields grouping, 
 Requires at least: 3.5
-Tested up to: 4.2.2
-Stable tag: 1.1.6
+Tested up to: 4.2.4
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,7 @@ If you ever wanted to get additional informations from customers while adding wo
 * Select
 * Date Picker
 * Color Picker
+* File
 
 = Documentation =
 * [Getting Started](http://sarkware.com/wc-fields-factory-a-wordpress-plugin-to-add-custom-fields-to-woocommerce-product-page/)
@@ -98,4 +99,9 @@ If you ever wanted to get additional informations from customers while adding wo
 * Newline character ( for select, checkbox and radio ) - issue fixed 
 
 = 1.1.6 =
-* fixed "Missing argument" error log warning message     
+* fixed "Missing argument" error log warning message    
+
+= 1.2.0 =
+* Woocommerce 2.4.X compatible 
+* File upload field type added
+* Internationalization ( i18n ) support added

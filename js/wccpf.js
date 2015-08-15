@@ -135,9 +135,9 @@ var wccpf = function() {
 	        'slow'
 	    );
 		/* Update fields with corresponding values */
-		$("#wccpf-field-type-meta-label").val( this.activeField["label"] );
-		$("#wccpf-field-type-meta-name").val( this.activeField["name"] );
-		$("#wccpf-field-type-meta-type").val( this.activeField["type"] );
+		$("#wccpf-field-type-meta-label").val( this.unEscapeQuote( this.activeField["label"] ) );
+		$("#wccpf-field-type-meta-name").val( this.unEscapeQuote( this.activeField["name"] ) );
+		$("#wccpf-field-type-meta-type").val( this.unEscapeQuote( this.activeField["type"] ) );
 		
 		var me = this;		
 		$("#wccpf-field-types-meta-body div.wccpf-field-types-meta").each(function() {
@@ -145,7 +145,7 @@ var wccpf = function() {
 				me.activeField[ $(this).attr("data-param") ] = me.activeField[ $(this).attr("data-param") ].replace( /;/g, "\n" );
 			}
 			if( $(this).attr("data-type") != "radio" ) {				
-				$("#wccpf-field-type-meta-"+$(this).attr("data-param")).val( me.activeField[ $(this).attr("data-param") ] );
+				$("#wccpf-field-type-meta-"+$(this).attr("data-param")).val( me.unEscapeQuote( me.activeField[ $(this).attr("data-param") ] ) );
 			} else {
 				$("input[name=wccpf-field-type-meta-"+ $(this).attr("data-param") +"][value="+ me.activeField[ $(this).attr("data-param") ] +"]" ).prop( 'checked', true );	
 			}
@@ -159,19 +159,20 @@ var wccpf = function() {
 	};
 	
 	this.onFieldSubmit = function( target ) {
-		var payload = {};
-		payload.type = $("#wccpf-field-type-meta-type").val().replace(/['"]/g, '');
-		payload.label = $("#wccpf-field-type-meta-label").val().replace(/['"]/g, '');
-		payload.name = $("#wccpf-field-type-meta-name").val().replace(/['"]/g, '');
+		var me = this, 
+		payload = {};
+		payload.type = me.escapeQuote( $("#wccpf-field-type-meta-type").val() );
+		payload.label = me.escapeQuote( $("#wccpf-field-type-meta-label").val() );
+		payload.name = me.escapeQuote( $("#wccpf-field-type-meta-name").val() );
 		
 		$("#wccpf-field-types-meta-body div.wccpf-field-types-meta").each(function() {
 			if( $(this).attr("data-type") != "radio" ) {
-				payload[ $(this).attr("data-param") ] = $("#wccpf-field-type-meta-"+$(this).attr("data-param")).val().replace(/['"]/g, '');
+				payload[ $(this).attr("data-param") ] = me.escapeQuote( $("#wccpf-field-type-meta-"+ $(this).attr("data-param") ).val() );				
 				if( $(this).attr("data-param") == "choices" || $(this).attr("data-param") == "default_value" ) {
 					payload[ $(this).attr("data-param") ] = payload[ $(this).attr("data-param") ].replace( /\n/g, ";" );
 				}				
 			} else {
-				payload[ $(this).attr("data-param") ] = $("input[name=wccpf-field-type-meta-"+ $(this).attr("data-param") +"]:checked" ).val().replace(/['"]/g, '');				
+				payload[ $(this).attr("data-param") ] = me.escapeQuote( $("input[name=wccpf-field-type-meta-"+ $(this).attr("data-param") +"]:checked" ).val() );				
 			}
 		});	
 		
@@ -212,6 +213,18 @@ var wccpf = function() {
 	this.sanitizeStr = function( str ) {
 		return str.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_');
 	};	 
+	
+	this.escapeQuote = function( str ) {
+		str = str.replace( /[']/g, '&#39;' );
+		str = str.replace( /["]/g, '&#34;' );
+		return str;
+	}
+	
+	this.unEscapeQuote = function( str ) {
+		str = str.replace( '&#39;', "'" );
+		str = str.replace( '&#34;', '"' );
+		return str;
+	}
 	
 	this.prepareRequest = function( _request, _context, _payload ) {
 		this.request = {

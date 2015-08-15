@@ -24,8 +24,8 @@ array_unshift( $pcats , array( "id" => "-1", "title" => "All Categories" ));
 		<tbody>
 			<tr>
 				<td class="summary">
-					<label for="post_type">Rules</label>
-					<p class="description">Add rules to determines which products or product categories will have this custom fields group</p>
+					<label for="post_type"><?php _e( 'Rules', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Add rules to determines which products or product categories will have this custom fields group', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
 					<div class="wccpf_logic_groups">
@@ -33,7 +33,7 @@ array_unshift( $pcats , array( "id" => "-1", "title" => "All Categories" ));
 						foreach ( $rule_group as $group ) { ?>
 																			
 							<div class="wccpf_logic_group"> 
-								<h4><?php echo ( $index == 0 ) ? 'Show this product fields group if' : 'or'; ?></h4>
+								<h4><?php echo ( $index == 0 ) ? __( 'Show this product fields group if', 'wc-fields-factory' ) : __( 'or', 'wc-fields-factory' ); ?></h4>
 								<table class="wccpf_table wccpf_rules_table">
 								<tbody>
 									<?php foreach ( $group as $rule ) { ?>
@@ -71,7 +71,7 @@ array_unshift( $pcats , array( "id" => "-1", "title" => "All Categories" ));
 											?>
 											</select>
 										</td>
-										<td class="add"><a href="#" class="condition-add-rule button">and</a></td>
+										<td class="add"><a href="#" class="condition-add-rule button"><?php _e( 'and', 'wc-fields-factory' ); ?></a></td>
 										<td class="remove"><?php echo ( $index != 0 ) ? '<a href="#" class="condition-remove-rule wccpf-button-remove"></a>' : ''; ?></td>
 									</tr>
 									<?php $index++; } ?>
@@ -81,27 +81,27 @@ array_unshift( $pcats , array( "id" => "-1", "title" => "All Categories" ));
 					
 					<?php } } else { ?>					
 						<div class="wccpf_logic_group"> 
-							<h4>Show this product fields group if</h4>
+							<h4><?php _e( 'Show this product fields group if', 'wc-fields-factory' ); ?></h4>
 							<table class="wccpf_table wccpf_rules_table">
 								<tbody>
 									<tr>
 										<td>
 											<select class="wccpf_condition_param select">
-												<option value="product" selected="selected">Product</option>
-												<option value="product_cat">Product Category</option>
+												<option value="product" selected="selected"><?php _e( 'Product', 'wc-fields-factory' ); ?></option>
+												<option value="product_cat"><?php _e( 'Product Category', 'wc-fields-factory' ); ?></option>
 												
 											</select>
 										</td>
 										<td>
 											<select class="wccpf_condition_operator select">
-												<option value="==" selected="selected">is equal to</option>
-												<option value="!=">is not equal to</option>
+												<option value="==" selected="selected"><?php _e( 'is equal to', 'wc-fields-factory' ); ?></option>
+												<option value="!="><?php _e( 'is not equal to', 'wc-fields-factory' ); ?></option>
 											</select>
 										</td>
 										<td class="condition_value_td">
 											<?php echo apply_filters( 'wccpf/build/products_list', "wccpf_condition_value" ); ?>											
 										</td>
-										<td class="add"><a href="#" class="condition-add-rule button">and</a></td>
+										<td class="add"><a href="#" class="condition-add-rule button"><?php _e( 'and', 'wc-fields-factory' ); ?></a></td>
 										<td class="remove"></td>
 									</tr>
 								</tbody>
@@ -110,7 +110,7 @@ array_unshift( $pcats , array( "id" => "-1", "title" => "All Categories" ));
 					
 					<?php } ?>
 						<h4>or</h4>
-						<a href="#" class="condition-add-group button">Add rule group</a>	
+						<a href="#" class="condition-add-group button"><?php _e( 'Add rule group', 'wc-fields-factory' ); ?></a>	
 					</div>
 				</td>
 			</tr>

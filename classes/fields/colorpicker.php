@@ -19,14 +19,14 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 	function render_admin_field() { ob_start(); ?>
 			<tr>
 				<td class="summary">
-					<label for="post_type">Required</label>
-					<p class="description">Is this field Mandatory</p>
+					<label for="post_type"><?php _e( 'Required', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Is this field Mandatory', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="radio" data-param="required">
 						<ul class="wccpf-field-layout-horizontal">
-							<li><label><input type="radio" name="wccpf-field-type-meta-required" value="yes" /> Yes</label></li>
-							<li><label><input type="radio" name="wccpf-field-type-meta-required" value="no" checked/> No</label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-required" value="yes" /> <?php _e( 'Yes', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-required" value="no" checked/> <?php _e( 'No', 'wc-fields-factory' ); ?></label></li>
 						</ul>						
 					</div>
 				</td>
@@ -34,8 +34,8 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
-					<label for="post_type">Message</label>
-					<p class="description">Message to display whenever the validation failed</p>
+					<label for="post_type"><?php _e( 'Message', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Message to display whenever the validation failed', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="text" data-param="message">
@@ -46,8 +46,8 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
-					<label for="post_type">Place Holder</label>
-					<p class="description">Place holder text for this Text Box</p>
+					<label for="post_type"><?php _e( 'Place Holder', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Place holder text for this Text Box', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
 					<div class="wccpf-field-types-meta" data-type="text" data-param="placeholder">
