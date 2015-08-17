@@ -12,7 +12,7 @@ class wccpf_product_form {
 	
 	function __construct() {
 		add_action( 'woocommerce_before_add_to_cart_button', array( $this, 'inject_wccpf' ) );
-		add_action( 'woocommerce_add_to_cart_validation', array( $this, 'validate_wccpf' ), 10, 3 );
+		add_filter( 'woocommerce_add_to_cart_validation', array( $this, 'validate_wccpf' ), 1, 2 );
 		add_filter( 'woocommerce_add_cart_item_data', array( $this, 'save_wccpf_data' ), 10, 2 );
 		add_filter( 'woocommerce_get_item_data', array( $this, 'render_wccpf_data' ), 1, 2 );		
 		add_action( 'woocommerce_add_order_item_meta', array( $this, 'save_wccpf_order_meta' ), 1, 3 );
@@ -54,12 +54,13 @@ class wccpf_product_form {
 	 * @param 	INT		 $quantity
 	 * @todo	There is an unsolved issue, when grouped products are validated ( There won't be $pid ).
 	 */
-	function validate_wccpf( $unknown, $pid = null, $quantity ) {		
+	function validate_wccpf( $passed, $pid = null ) {		
 		if( isset( $pid ) ) {
 			$is_passed = true;			
 			$all_fields = apply_filters( 'wccpf/load/all_fields', $pid );
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {
+					$res = true;
 					$val = $_REQUEST[ $field["name"] ];	
 					if( $field["type"] != "file" ) {				
 						if( $field["required"] == "yes" ) {			
@@ -67,7 +68,7 @@ class wccpf_product_form {
 						}
 					} else {						
 						$res = apply_filters( 'wccpf/upload/validate', $_FILES[ $field["name"] ], $field['filetypes'], $field["required"] );												
-					}
+					}					
 					if( $res == 0 ) {
 						$is_passed = false;
 						wc_add_notice( $field["message"], 'error' );
@@ -88,17 +89,17 @@ class wccpf_product_form {
 			foreach ( $all_fields as $fields ) {
 				foreach ( $fields as $field ) {					
 					if( isset( $_REQUEST[ $field["name"] ] ) || isset( $_FILES[ $field["name"] ] ) ) {
-						if( $field["type"] != "checkbox" && $field["type"] != "file" ) {
+						if( $field["type"] != "checkbox" && $field["type"] != "file" ) {							
 							WC()->session->set( $unique_cart_item_key.$field["name"], $_REQUEST[ $field["name"] ] );
-						} else if( $field["type"] == "checkbox" ) {
+						} else if( $field["type"] == "checkbox" ) {							
 							WC()->session->set( $unique_cart_item_key.$field["name"], implode( ", ", $_REQUEST[ $field["name"] ] ) );
-						} else {									
+						} else {							
 							/* Handle the file upload */
 							$res = apply_filters( 'wccpf/upload/type=file', $_FILES[ $field["name"] ] );
 							if( !isset( $res['error'] ) ) {								
 								WC()->session->set( $unique_cart_item_key.$field["name"], json_encode( $res ) );
 								do_action( 'wccpf/uploaded/file', $res );
-							} else {
+							} else {								
 								wc_add_wp_error_notices( $field["message"], 'error' );
 							}												
 						}

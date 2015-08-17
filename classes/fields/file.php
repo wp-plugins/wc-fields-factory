@@ -14,7 +14,7 @@ class wccpf_field_file extends wccpf_product_field {
 		);	
 
 		/* File upload validator */
-		add_filter( 'wccpf/upload/validate', array( $this, 'validate' ), 5, 3 );
+		add_filter( 'wccpf/upload/validate', array( $this, 'validate_file_upload' ), 5, 3 );
 		/* File upload filter */
 		add_filter( 'wccpf/upload/type=file', array( $this, 'process_file_upload' ) );
 		
@@ -102,7 +102,12 @@ class wccpf_field_file extends wccpf_product_field {
 		return $movefile;		
 	}
 	
-	function validate( $uploadedfile, $file_types, $mandatory ) {
+	/* Just for compatibility, Actual validation done by 'validate_file_upload' */
+	function validate( $val ) {
+		return true;
+	}
+		
+	function validate_file_upload( $uploadedfile, $file_types, $mandatory ) {
 		
 		$file_ok = false;
 		$no_file = false;
