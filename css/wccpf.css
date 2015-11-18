@@ -254,12 +254,17 @@ table.wccpf_table th.field_order {
 	color:#2ea2cc;
 }
 
+/* Css for Setting page starts here */
 
-
-.wccpf-meta-row .wccpf-field-name {
-	
+.wccpf-options-wrapper {	
+	height:auto;
+	max-width:900px;
 }
 
-.wccpf-meta-row .wccpf-field-type {
-	
+.wccpf-options-form {
+	margin-top:20px;
+}
+
+.wccpf-options-form table {
+	background:#fff;
 }

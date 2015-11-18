@@ -3,7 +3,7 @@
 Plugin Name: WC Fields Factory
 Plugin URI: http://sarkware.com/wc-fields-factory-a-wordpress-plugin-to-add-custom-fields-to-woocommerce-product-page/
 Description: It allows you to add custom fields to your woocommerce product page. You can add custom fields and validations without tweaking any of your theme's code & templates, It also allows you to group the fields and add them to particular products or for particular product categories. Supported field types are text, numbers, email, textarea, checkbox, radio and select.
-Version: 1.2.1
+Version: 1.2.2
 Author: Saravana Kumar K
 Author URI: http://www.iamsark.com/
 License: GPL
@@ -36,6 +36,7 @@ class wccpf {
 	}
 	
 	function admin_menu() {
+		
 		$admin = add_menu_page( 
 			"WC Fields Factory", 
 			"Fields Factory", 
@@ -51,6 +52,15 @@ class wccpf {
 			"manage_options",
 			'post-new.php?post_type=wccpf'
 		);
+		add_submenu_page( 
+			'edit.php?post_type=wccpf', 
+			'Wc Fields Factory Options', 
+			'Settings', 
+			'manage_options', 
+			'wccpf_settings', 
+			'wccpf_render_option_page' 
+		);
+		
 	}
 	
 	function init() {	
@@ -87,7 +97,8 @@ class wccpf {
 		wp_register_style( 'wccpf-style', $this->settings['dir'] . 'css/wccpf.css' );
 		
 		if( is_admin() ) {
-			add_action('admin_menu', array($this,'admin_menu'));
+			include_once('classes/wccpf-options.php');
+			add_action( 'admin_menu', array($this,'admin_menu' ) );			
 		}
 	}
 	
@@ -111,7 +122,7 @@ class wccpf {
 		include_once('classes/misc/wccpf-response.php');
 		include_once('classes/dao.php');
 		include_once('classes/builder.php');
-		include_once('classes/listener.php');
+		include_once('classes/listener.php');		
 		include_once('classes/admin-form.php');
 		include_once('classes/product-form.php');
 		

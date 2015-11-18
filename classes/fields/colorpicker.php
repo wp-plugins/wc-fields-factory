@@ -46,12 +46,60 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
-					<label for="post_type"><?php _e( 'Place Holder', 'wc-fields-factory' ); ?></label>
-					<p class="description"><?php _e( 'Place holder text for this Text Box', 'wc-fields-factory' ); ?></p>
+					<label for="post_type"><?php _e( 'Visibility', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'However this field will be saved with Order Meta, regardless of this visibility option.', 'wc-fields-factory' ); ?></p>
 				</td>
 				<td>
-					<div class="wccpf-field-types-meta" data-type="text" data-param="placeholder">
-						<input type="text" id="wccpf-field-type-meta-placeholder" value="" />
+					<div class="wccpf-field-types-meta" data-type="radio" data-param="visibility">
+						<ul class="wccpf-field-layout-vertical">
+							<li><label><input type="radio" name="wccpf-field-type-meta-visibility" value="yes" checked /> <?php _e( 'Show in Cart & Checkout Page', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-visibility" value="no" /> <?php _e( 'Hide in Cart & Checkout Page', 'wc-fields-factory' ); ?></label></li>							
+						</ul>						
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="summary">
+					<label for="post_type"><?php _e( 'Color Format', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'How you want the color value', 'wc-fields-factory' ); ?></p>
+				</td>
+				<td>
+					<div class="wccpf-field-types-meta" data-type="radio" data-param="color_format">
+						<ul class="wccpf-field-layout-horizontal">
+							<li><label><input type="radio" name="wccpf-field-type-meta-color_format" value="hex" checked /> <?php _e( 'HEX', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-color_format" value="hex3" /> <?php _e( 'HEX3', 'wc-fields-factory' ); ?></label></li>							
+							<li><label><input type="radio" name="wccpf-field-type-meta-color_format" value="hsl"  /> <?php _e( 'HSL', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-color_format" value="rgb" /> <?php _e( 'RGB', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-color_format" value="name" /> <?php _e( 'Name', 'wc-fields-factory' ); ?></label></li>
+						</ul>						
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="summary">
+					<label for="post_type"><?php _e( 'Palettes', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Instead of showing only the color picker, you can show them personalized palettes, where customer chooce one of the color provided by you.', 'wc-fields-factory' ); ?><br/><br/>#fff, #ccc, #555<br/>#f00, #0f0, #00f</p>
+				</td>
+				<td>
+					<div class="wccpf-field-types-meta" data-type="textarea" data-param="palettes">
+						<textarea rows="6" id="wccpf-field-type-meta-palettes"></textarea>						
+					</div>
+				</td>
+			</tr>				
+			
+			<tr>
+				<td class="summary">
+					<label for="post_type"><?php _e( 'Show Palette Only', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'Want show only the palette.? or along with the color picker.?', 'wc-fields-factory' ); ?></p>
+				</td>
+				<td>
+					<div class="wccpf-field-types-meta" data-type="radio" data-param="show_palette_only">
+						<ul class="wccpf-field-layout-horizontal">
+							<li><label><input type="radio" name="wccpf-field-type-meta-show_palette_only" value="yes" /> <?php _e( 'Yes', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-show_palette_only" value="no" checked/> <?php _e( 'No', 'wc-fields-factory' ); ?></label></li>
+						</ul>						
 					</div>
 				</td>
 			</tr>		
@@ -60,24 +108,33 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 		return ob_get_clean();
 	}
 	
-	function render_product_field( $field ) { ob_start(); ?>
+	function render_product_field( $field ) { 
+		
+		$wccpf_options = get_option( 'wccpf_options' );
+		$wccpf_options =  is_array( $wccpf_options ) ? $wccpf_options : array();
+		$fields_cloning = isset( $wccpf_options["fields_cloning"] ) ? $wccpf_options["fields_cloning"] : "no";
+		$colorformat = isset( $field["color_format"] ) ? $field["color_format"] : "hex";
+		
+		$name_index = $fields_cloning == "yes" ? "_1" : "";		
+		
+		ob_start(); ?>
 		
 		<?php if( has_action('wccpf/before/field/rendering' ) && has_action('wccpf/after/field/rendering' ) ) : ?>
 		
-			<?php do_action( 'wccpf/before/field/rendering', $field["name"], $field["label"] ); ?>
+			<?php do_action( 'wccpf/before/field/rendering', $field ); ?>
 			
-			<input type="text" name="<?php echo esc_attr( $field["name"] ); ?>" class="color" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" value="" />
+			<input type="text" name="<?php echo esc_attr( $field["name"] . $name_index ); ?>" class="wccpf-field wccpf-color wccpf-color-<?php echo esc_attr( $field["name"] ); ?>" value="" />
 			
-			<?php do_action( 'wccpf/after/field/rendering' ); ?>
+			<?php do_action( 'wccpf/after/field/rendering', $field ); ?>
 		
 		<?php else : ?>
 		
 		<table class="wccpf_fields_table <?php echo apply_filters( 'wccpf/fields/container/class', '' ); ?>" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_html( $field["label"] ); ?></label></td>
+					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] . $name_index ); ?>"><?php echo esc_html( $field["label"] ); ?></label></td>
 					<td class="wccpf_value">
-						<input type="text" name="<?php echo esc_attr( $field["name"] ); ?>" class="color" placeholder="<?php echo esc_attr( $field["placeholder"] ); ?>" value="" />
+						<input type="text" name="<?php echo esc_attr( $field["name"] . $name_index ); ?>" class="wccpf-field wccpf-color wccpf-color-<?php echo esc_attr( $field["name"] ); ?>" value="" />
 					</td>
 				</tr>
 			</tbody>
@@ -85,10 +142,50 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 		
 		<?php endif; ?>
 		
+		<?php 
+		
+		$palettes = null;
+		if( isset( $field["palettes"] ) && $field["palettes"] != "" ) {
+			$palettes = explode( ";", $field["palettes"] );			
+		}		
+		
+		?>
+		
 		<script type="text/javascript">
 			var $ = jQuery;
-			$( document ).ready(function() {				
-				$( "input[name=<?php echo esc_attr( $field["name"] ); ?>]" ).colorPicker();
+			function wccpf_init_color_picker() {
+				$( ".wccpf-color-<?php echo esc_attr( $field["name"] ); ?>").spectrum({
+					 preferredFormat: "<?php echo $colorformat; ?>",					
+					<?php 
+						$comma = "";
+						$indexX = 0;
+						$indexY = 0;
+						if( is_array( $palettes ) && count( $palettes ) > 0 ) {
+							if( $field["show_palette_only"] == "yes" ) {
+								echo "showPaletteOnly: true,";
+							}
+							echo "showPalette: true,";
+							echo "palette : [";						
+							foreach ( $palettes as $palette ) {		
+								$indexX = 0;								
+								$comma = ( $indexY == 0 ) ? "" : ",";
+								echo $comma."[";
+								$colors = explode( ",", $palette );
+							 	foreach ( $colors as $color ) {							 		
+							 		$comma = ( $indexX == 0 ) ? "" : ","; 
+							 		echo $comma ."'". $color ."'";	
+							 		$indexX++;
+								}
+								echo "]";
+								$indexY++;
+							} 
+							echo "]";						
+						}
+					?>
+				});
+			}				
+			$( document ).ready(function() {			
+				wccpf_init_color_picker();
 			});
 		</script>
 		

@@ -18,7 +18,7 @@ class wccpf_admin_form {
 		add_action( 'admin_head-post-new.php',  array( $this, 'wccpf_post_single_view' ) );
 		add_action( 'wccpf/admin/head', array( $this, 'wccpf_admin_head' ) );
 		add_filter( 'manage_edit-wccpf_columns', array( $this, 'wccpf_columns' ) ) ;
-		add_action( 'manage_wccpf_posts_custom_column', array( $this, 'wccpf_post_listing' ), 10, 2 );
+		add_action( 'manage_wccpf_posts_custom_column', array( $this, 'wccpf_post_listing' ), 10, 2 );		
 	}
 
 	function wccpf_post_single_view() {		
@@ -84,18 +84,17 @@ class wccpf_admin_form {
 				'jquery-ui-sortable',
 				'wp-color-picker',
 				'wccpf-script'		
-			));
-			
+			));				
 			wp_enqueue_style(array(
 				'thickbox',
 				'wp-color-picker',
 				'wccpf-style'
-			));			
+			));
 		}
 	}
 	
-	function wccpf_check_screen() {
-		return get_current_screen() -> id == "wccpf";
+	function wccpf_check_screen() {		
+		return get_current_screen() -> id == "wccpf" || get_current_screen() -> id == "wccpf-options";
 	}
 	
 	function wccpf_admin_head() {

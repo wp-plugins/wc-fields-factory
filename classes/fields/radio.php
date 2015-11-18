@@ -48,6 +48,21 @@ class wccpf_field_radio extends wccpf_product_field {
 			
 			<tr>
 				<td class="summary">
+					<label for="post_type"><?php _e( 'Visibility', 'wc-fields-factory' ); ?></label>
+					<p class="description"><?php _e( 'However this field will be saved with Order Meta, regardless of this visibility option.', 'wc-fields-factory' ); ?></p>
+				</td>
+				<td>
+					<div class="wccpf-field-types-meta" data-type="radio" data-param="visibility">
+						<ul class="wccpf-field-layout-vertical">
+							<li><label><input type="radio" name="wccpf-field-type-meta-visibility" value="yes" checked /> <?php _e( 'Show in Cart & Checkout Page', 'wc-fields-factory' ); ?></label></li>
+							<li><label><input type="radio" name="wccpf-field-type-meta-visibility" value="no" /> <?php _e( 'Hide in Cart & Checkout Page', 'wc-fields-factory' ); ?></label></li>							
+						</ul>						
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="summary">
 					<label for="post_type"><?php _e( 'Options', 'wc-fields-factory' ); ?></label>
 					<p class="description"><?php _e( 'Enter each options on a new line like this', 'wc-fields-factory' ); ?><br/><br/>red|Red<br/>blue|Blue</p>
 				</td>
@@ -83,20 +98,25 @@ class wccpf_field_radio extends wccpf_product_field {
 						</ul>						
 					</div>
 				</td>
-			</tr>
+			</tr>		
 									
 		<?php
 		return ob_get_clean();		
 	}
 	
 	function render_product_field( $field ) { 
+		
+		$wccpf_options = get_option( 'wccpf_options' );
+		$wccpf_options =  is_array( $wccpf_options ) ? $wccpf_options : array();
+		$fields_cloning = isset( $wccpf_options["fields_cloning"] ) ? $wccpf_options["fields_cloning"] : "no";
+		$name_index = $fields_cloning == "yes" ? "_1" : "";
+		
 		$layout = ( $field['layout'] == "horizontal" ) ? "wccpf-field-layout-horizontal" : "wccpf-field-layout-vertical";
-		ob_start();
-	?>
+		ob_start(); ?>
 	
 		<?php if( has_action('wccpf/before/field/rendering' ) && has_action('wccpf/after/field/rendering' ) ) : ?>
 		
-			<?php do_action( 'wccpf/before/field/rendering', $field["name"], $field["label"] ); ?>
+			<?php do_action( 'wccpf/before/field/rendering', $field ); ?>
 			
 			<ul class="<?php echo $layout; ?>">
 			<?php 
@@ -110,18 +130,18 @@ class wccpf_field_radio extends wccpf_product_field {
 					$attr = '';
 				}
 				$key_val = explode( "|", $choice ); ?>
-				<li><label><input type="radio" name="<?php echo esc_attr( $field["name"] ); ?>" value="<?php echo esc_attr( trim( $key_val[0] ) ); ?>" <?php echo $attr; ?>/> <?php echo esc_html( trim( $key_val[1] ) ); ?></label></li>
+				<li><label><input type="radio" class="wccpf-field" name="<?php echo esc_attr( $field["name"] . $name_index ); ?>" value="<?php echo esc_attr( trim( $key_val[0] ) ); ?>" <?php echo $attr; ?>/> <?php echo esc_html( trim( $key_val[1] ) ); ?></label></li>
 			<?php } ?>		
 			</ul>
 			
-			<?php do_action( 'wccpf/after/field/rendering' ); ?>
+			<?php do_action( 'wccpf/after/field/rendering', $field ); ?>
 		
 		<?php else : ?>
 	
 		<table class="wccpf_fields_table <?php echo apply_filters( 'wccpf/fields/container/class', '' ); ?>" cellspacing="0">
 			<tbody>
 				<tr>
-					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] ); ?>"><?php echo esc_html( $field["label"] ); ?></label></td>
+					<td class="wccpf_label"><label for="<?php echo esc_attr( $field["name"] . $name_index ); ?>"><?php echo esc_html( $field["label"] ); ?></label></td>
 					<td class="wccpf_value">
 						<ul class="<?php echo $layout; ?>">
 						<?php 
@@ -135,7 +155,7 @@ class wccpf_field_radio extends wccpf_product_field {
 								$attr = '';
 							}
 							$key_val = explode( "|", $choice ); ?>
-							<li><label><input type="radio" name="<?php echo esc_attr( $field["name"] ); ?>" value="<?php echo esc_attr( trim( $key_val[0] ) ); ?>" <?php echo $attr; ?>/> <?php echo esc_html( trim( $key_val[1] ) ); ?></label></li>
+							<li><label><input type="radio" class="wccpf-field" name="<?php echo esc_attr( $field["name"] . $name_index ); ?>" value="<?php echo esc_attr( trim( $key_val[0] ) ); ?>" <?php echo $attr; ?>/> <?php echo esc_html( trim( $key_val[1] ) ); ?></label></li>
 						<?php } ?>		
 						</ul>
 					</td>

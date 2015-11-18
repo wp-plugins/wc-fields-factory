@@ -48,3 +48,47 @@ ul.wccpf-field-layout-horizontal li {
 ul.wccpf-field-layout-vertical li {
 	display:block;
 }
+
+/* jQuery UI Datepicker fix */
+
+.ui-datepicker {
+	z-index:10000;
+}
+
+/* Custom fields group on cart & checkout */
+
+.wccpf-fields-group-on-cart {
+	
+}
+
+.wccpf-fields-group-on-cart fieldset {
+	margin: 0px;
+    padding: 0px;
+}
+
+.wccpf-fields-group-on-cart h5 {
+	margin:2px 0px;
+}
+
+.wccpf-fields-group-on-cart fieldset ul {
+	display:table;
+	clear:both;
+	margin:0px;
+	padding:0px;	
+	padding-left:10px;
+}
+
+.wccpf-fields-group-on-cart fieldset li {
+	float:left;	
+	margin:0px;
+	list-style:none;	
+	line-height: 20px;
+}
+
+.wccpf-fields-group-on-cart fieldset li:first-child {
+	width:100px;
+}
+
+.wccpf-fields-group-on-cart fieldset li p {
+	margin:0px;
+}

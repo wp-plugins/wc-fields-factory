@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: wc fields factory, custom product fields, customize woocommerce product page, add custom fields to woocommerce product page, custom fields validations, custom fields grouping, 
 Requires at least: 3.5
 Tested up to: 4.2.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,3 +108,24 @@ If you ever wanted to get additional informations from customers while adding wo
 
 = 1.2.1 =
 * Add to cart validation issue fixed
+
+= 1.2.2 =
+* Fields cloning option added ( Fields per count, If customer increase product count custom fields also cloned )
+* Visibility of custom meta can be set ( show or hide on cart & checkout page )
+
+* Setting page added
+* Visibility Option - you can set custom data visibility globally ( applicable for all custom fields - created by this plugin )
+* Field Location - you can specifiy where the custom fields should be included.
+* Enable or Disbale - fields cloning option.
+* Grouping the meta on cart & checkout page, option added.
+* Grouping custom fields on cart & checkout page, option added.
+* Set label for fields group
+
+* Option to disable past or future dates
+* Option to disbale particular week days 
+* Read only option added for Datepicker textbox ( use for mobile view )
+* heigher value z-index applied for datepickers
+
+* Pallete option added to color picker
+* Option to show only palette or along with color picker  
+* Color format option added
