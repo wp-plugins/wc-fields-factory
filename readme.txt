@@ -123,7 +123,7 @@ If you ever wanted to get additional informations from customers while adding wo
 
 * Option to disable past or future dates
 * Option to disbale particular week days 
-* Read only option added for Datepicker textbox ( use for mobile view )
+* Read only option added for Datepicker textbox ( usefull for mobile view )
 * heigher value z-index applied for datepickers
 
 * Pallete option added to color picker

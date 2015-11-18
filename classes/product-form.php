@@ -70,7 +70,7 @@ class wccpf_product_form {
 				
 				echo $html;
 				
-				do_action( 'wccpf/after/field/start', $field );
+				do_action( 'wccpf/after/field/end', $field );
 				
 				if( $field["type"] == "datepicker" ) {
 					$is_datepicker_there = true;
