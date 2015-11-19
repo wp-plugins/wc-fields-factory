@@ -43,7 +43,7 @@ class wccpf_product_form {
 		if( isset( $wccpf_options["fields_group_title"] ) && $wccpf_options["fields_group_title"] != "" ) {
 			$fields_group_title = $wccpf_options["fields_group_title"];
 		} else {
-			$fields_group_title = "Addiotnal Options : ";
+			$fields_group_title = "Additional Options : ";
 		}
 			
 		$all_fields = apply_filters( 'wccpf/load/all_fields', $product->id );
