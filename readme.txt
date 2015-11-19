@@ -24,6 +24,7 @@ If you ever wanted to get additional informations from customers while adding wo
 * Validation and custom messages
 * Grouping custom fields
 * Assign groups to particular product or to particular product categories
+* Cloning custom fields ( fields per product quantity )
 * Automatically embeds custom fields meta into cart page, checkout page, order page and order confirmation emails
 * Powerful API to customize the appearance of custom fields
 
@@ -54,6 +55,7 @@ If you ever wanted to get additional informations from customers while adding wo
 1. Wccpf product custom fields list
 2. Wccpf fields factory
 3. Wccpf rules
+4. Wccpf settings
 
 == Changelog ==
 
@@ -120,12 +122,10 @@ If you ever wanted to get additional informations from customers while adding wo
 * Grouping the meta on cart & checkout page, option added.
 * Grouping custom fields on cart & checkout page, option added.
 * Set label for fields group
-
 * Option to disable past or future dates
-* Option to disbale particular week days 
+* Option to disbale particular week days
 * Read only option added for Datepicker textbox ( usefull for mobile view )
 * heigher value z-index applied for datepickers
-
 * Pallete option added to color picker
-* Option to show only palette or along with color picker  
+* Option to show only palette or along with color picker
 * Color format option added
