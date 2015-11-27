@@ -311,9 +311,11 @@
 						$(".wccpf-add-new-field").html("+ Add Field");
 						$("#wccpf_fields_factory").attr("action","POST");					
 					}				
-					if( this.request.request == "DELETE" ) {					
-						if( $("#wccpf-fields-set:empty") ) {					
+					if( this.request.request == "DELETE" ) {						
+						if( $(".wccpf-meta-row").length <= 1 ) {										
 							$("#wccpf-empty-field-set").show();
+						} else {
+							$("#wccpf-empty-field-set").hide();
 						}
 					}								
 					this.reloadHtml( $("#wccpf-fields-set") );				

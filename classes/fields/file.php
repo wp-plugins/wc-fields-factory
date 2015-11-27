@@ -151,13 +151,17 @@ class wccpf_field_file extends wccpf_product_field {
 		}
 		
 		if( $file_ok ) {				
-			$filename = $uploadedfile['name'];
-			$allowed_types = explode( ',', $file_types );	
-			$ext = pathinfo( $filename, PATHINFO_EXTENSION );
-			
-			if( !in_array( $ext, $allowed_types ) || $ext == "php" ) {
-				$file_ok = false;
-			}			
+			$filename = $uploadedfile['name'];			
+			if( $file_types && $file_types != "" ) {				
+				$allowed_types = explode( ',', $file_types );	
+				$ext = pathinfo( $filename, PATHINFO_EXTENSION );
+				
+				if( !in_array( $ext, $allowed_types ) || $ext == "php" ) {
+					$file_ok = false;
+				}	
+			} else {
+				$file_ok = true;
+			}
 		}			
 		
 		if( $no_file && $mandatory == "no" ) {

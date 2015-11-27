@@ -112,8 +112,7 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 		
 		$wccpf_options = get_option( 'wccpf_options' );
 		$wccpf_options =  is_array( $wccpf_options ) ? $wccpf_options : array();
-		$fields_cloning = isset( $wccpf_options["fields_cloning"] ) ? $wccpf_options["fields_cloning"] : "no";
-		$colorformat = isset( $field["color_format"] ) ? $field["color_format"] : "hex";
+		$fields_cloning = isset( $wccpf_options["fields_cloning"] ) ? $wccpf_options["fields_cloning"] : "no";		
 		
 		$name_index = $fields_cloning == "yes" ? "_1" : "";		
 		
@@ -140,56 +139,7 @@ class wccpf_field_colorpicker extends wccpf_product_field {
 			</tbody>
 		</table>	
 		
-		<?php endif; ?>
-		
-		<?php 
-		
-		$palettes = null;
-		if( isset( $field["palettes"] ) && $field["palettes"] != "" ) {
-			$palettes = explode( ";", $field["palettes"] );			
-		}		
-		
-		?>
-		
-		<script type="text/javascript">
-			var $ = jQuery;
-			function wccpf_init_color_picker() {
-				$( ".wccpf-color-<?php echo esc_attr( $field["name"] ); ?>").spectrum({
-					 preferredFormat: "<?php echo $colorformat; ?>",					
-					<?php 
-						$comma = "";
-						$indexX = 0;
-						$indexY = 0;
-						if( is_array( $palettes ) && count( $palettes ) > 0 ) {
-							if( $field["show_palette_only"] == "yes" ) {
-								echo "showPaletteOnly: true,";
-							}
-							echo "showPalette: true,";
-							echo "palette : [";						
-							foreach ( $palettes as $palette ) {		
-								$indexX = 0;								
-								$comma = ( $indexY == 0 ) ? "" : ",";
-								echo $comma."[";
-								$colors = explode( ",", $palette );
-							 	foreach ( $colors as $color ) {							 		
-							 		$comma = ( $indexX == 0 ) ? "" : ","; 
-							 		echo $comma ."'". $color ."'";	
-							 		$indexX++;
-								}
-								echo "]";
-								$indexY++;
-							} 
-							echo "]";						
-						}
-					?>
-				});
-			}				
-			$( document ).ready(function() {			
-				wccpf_init_color_picker();
-			});
-		</script>
-		
-		<?php 
+		<?php endif;		
 		return ob_get_clean();
 	}
 	

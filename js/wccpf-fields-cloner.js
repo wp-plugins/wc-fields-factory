@@ -27,13 +27,21 @@
 						
 						$("#wccpf-fields-container").append( cloned );		
 						
-						setTimeout( function(){ wccpf_init_color_picker(); }, 500 );
+						setTimeout( function(){ if( typeof( wccpf_init_color_pickers ) == 'function' ) { wccpf_init_color_pickers(); } }, 500 );
 					}					
 				} else {					
 					$("div.wccpf-fields-group:eq("+ ( product_count - 1 ) +")").nextAll().remove();
-				}		
+				}
+				
+				if( $(this).val() == 1 ) {
+		            $(".wccpf-fields-group-title-index").hide();
+		        } else {
+		            $(".wccpf-fields-group-title-index").show();
+		        }
 				
 			});
+			/* Trigger to change event - fix for min product quantity */
+			setTimeout( function(){ $( "input[name=quantity]" ).trigger("change"); }, 300 );
 		};
 	};
 	

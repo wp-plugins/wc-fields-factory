@@ -49,6 +49,8 @@ ul.wccpf-field-layout-vertical li {
 	display:block;
 }
 
+.wccpf-fields-group-title-index { display:none; }
+
 /* jQuery UI Datepicker fix */
 
 .ui-datepicker {

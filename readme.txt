@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: wc fields factory, custom product fields, customize woocommerce product page, add custom fields to woocommerce product page, custom fields validations, custom fields grouping, 
 Requires at least: 3.5
 Tested up to: 4.3.1
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,3 +129,11 @@ If you ever wanted to get additional informations from customers while adding wo
 * Pallete option added to color picker
 * Option to show only palette or along with color picker
 * Color format option added
+
+= 1.2.3 =
+* Multiple colour pickers issue fix
+* wccpf_init_color_pickers undefined issue fix
+* Group title index will be hidden if product count is 1
+* Minimum product quantity issue fix
+* File type validation issue fix
+* "Zero fields message" while deleting custom fields ( on wp-admin )

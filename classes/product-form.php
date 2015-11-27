@@ -88,6 +88,10 @@ class wccpf_product_form {
 		}
 		
 		do_action( 'wccpf/after/fields/end' );
+		
+		if( $is_colorpicker_there ) {
+			$this->wccpf_inject_color_picker_script();
+		}
 
 		$this->wccpf_front_end_enqueue_scripts( $is_datepicker_there, $is_colorpicker_there );
 	}
@@ -344,9 +348,25 @@ class wccpf_product_form {
 				$pcount = intval( $cart_item["quantity"] );
 				foreach ( $all_fields as $fields ) {					
 					for( $i = 1; $i <= $pcount; $i++ ) {
+						$meta_there = false;
+						/* Make sure cart_item does contains some custom meta to display */
+						foreach ( $fields as $field ) {
+							$field["visibility"] = isset( $field["visibility"] ) ? $field["visibility"] : "yes";
+							if( $field["visibility"] == "yes" ) {
+								if( $cart_item['wccpf_'. $field["name"] . "_" . $i ] && trim( $cart_item['wccpf_'. $field["name"] . "_" . $i ] ) ) {
+									$meta_there = true;
+									break;
+								}
+							}
+						}
 						
-						$meta_html .= '<fieldset>';						
-						$meta_html .= '<h5>'. esc_html( $fields_group_title ) . $i .'</h5>';
+						$title_index = ( $pcount == 1 ) ? "" : $i;
+								
+						$meta_html .= '<fieldset>';	
+						
+						if( $meta_there ) {
+							$meta_html .= '<h5>'. esc_html( $fields_group_title ) . $title_index .'</h5>';
+						}
 						
 						foreach ( $fields as $field ) {
 							$field["visibility"] = isset( $field["visibility"] ) ? $field["visibility"] : "yes";
@@ -460,6 +480,63 @@ class wccpf_product_form {
 				wp_enqueue_script( 'wccpf-fields-cloner' );
 			}
 		}
+	}
+	
+	function wccpf_inject_color_picker_script() {
+		Global $product;
+		$all_fields = apply_filters( 'wccpf/load/all_fields', $product->id );
+	
+		echo '<script type="text/javascript">
+				var $ = jQuery;
+				function wccpf_init_color_pickers() {';
+	
+		foreach ( $all_fields as $fields ) {
+			foreach ( $fields as $key => $field ) {
+				if( $field["type"] == "colorpicker" ) {
+					$palettes = null;
+					$colorformat = isset( $field["color_format"] ) ? $field["color_format"] : "hex";
+					if( isset( $field["palettes"] ) && $field["palettes"] != "" ) {
+						$palettes = explode( ";", $field["palettes"] );
+					} ?>
+											
+					$( ".wccpf-color-<?php echo esc_attr( $field["name"] ); ?>").spectrum({
+						 preferredFormat: "<?php echo $colorformat; ?>",					
+						<?php 
+						$comma = "";
+						$indexX = 0;
+						$indexY = 0;
+						if( is_array( $palettes ) && count( $palettes ) > 0 ) {
+							if( $field["show_palette_only"] == "yes" ) {
+								echo "showPaletteOnly: true,";
+							}
+							echo "showPalette: true,";
+							echo "palette : [";						
+							foreach ( $palettes as $palette ) {		
+								$indexX = 0;								
+								$comma = ( $indexY == 0 ) ? "" : ",";
+								echo $comma."[";
+								$colors = explode( ",", $palette );
+							 	foreach ( $colors as $color ) {							 		
+							 		$comma = ( $indexX == 0 ) ? "" : ","; 
+							 		echo $comma ."'". $color ."'";	
+							 		$indexX++;
+								}
+								echo "]";
+								$indexY++;
+							} 
+							echo "]";						
+						}
+						?>
+					});		
+				<?php 
+				}
+			}
+		}		
+		echo '}				
+			$( document ).ready(function() {			
+				wccpf_init_color_pickers();
+			});
+		</script>';
 	}
 } 
 
