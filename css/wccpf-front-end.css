@@ -1,0 +1,96 @@
+table.wccpf_fields_table {
+	width:100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+
+table.wccpf_fields_table td.wccpf_label {
+	width:100px;
+}
+
+table.wccpf_fields_table td.wccpf_value input[type=text],
+table.wccpf_fields_table td.wccpf_value input[type=number],
+table.wccpf_fields_table td.wccpf_value input[type=email],
+table.wccpf_fields_table td.wccpf_value input[type=password],
+table.wccpf_fields_table td.wccpf_value textarea,
+table.wccpf_fields_table td.wccpf_value select {
+	width: 100%;
+	padding: 5px;
+	height: auto;
+	border: 1px solid #ddd;
+	-ms-box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-ms-border-radius:0px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+table.wccpf_fields_table td.wccpf_value textarea {
+	resize: vertical;
+}
+
+ul.wccpf-field-layout-horizontal {
+	display:block;
+}
+
+ul.wccpf-field-layout-horizontal li {
+	margin-right: 10px;
+	display:inline-block;
+}
+
+ul.wccpf-field-layout-vertical li {
+	display:block;
+}
+
+.wccpf-fields-group-title-index { display:none; }
+
+/* jQuery UI Datepicker fix */
+
+.ui-datepicker {
+	z-index:10000;
+}
+
+/* Custom fields group on cart & checkout */
+
+.wccpf-fields-group-on-cart {
+	
+}
+
+.wccpf-fields-group-on-cart fieldset {
+	margin: 0px;
+    padding: 0px;
+}
+
+.wccpf-fields-group-on-cart h5 {
+	margin:2px 0px;
+}
+
+.wccpf-fields-group-on-cart fieldset ul {
+	display:table;
+	clear:both;
+	margin:0px;
+	padding:0px;	
+	padding-left:10px;
+}
+
+.wccpf-fields-group-on-cart fieldset li {
+	float:left;	
+	margin:0px;
+	list-style:none;	
+	line-height: 20px;
+}
+
+.wccpf-fields-group-on-cart fieldset li:first-child {
+	width:100px;
+}
+
+.wccpf-fields-group-on-cart fieldset li p {
+	margin:0px;
+}
