@@ -131,7 +131,7 @@ function wccpf_render_option_page() {
 					</td>
 					<td>
 						<div class="wccpf-field-types-meta">
-							<input type="text" name="wccpf_options[fields_group_title]" value="<?php echo esc_attr( $group_title ); ?>" placeholder="eg. Addiotnal Options : "/>						
+							<input type="text" name="wccpf_options[fields_group_title]" value="<?php echo esc_attr( $group_title ); ?>" placeholder="eg. Additional Options : "/>						
 						</div>
 					</td>
 				</tr>				
