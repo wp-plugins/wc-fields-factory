@@ -334,7 +334,7 @@ class wccpf_product_form {
 		if( isset( $wccpf_options["fields_group_title"] ) && $wccpf_options["fields_group_title"] != "" ) {
 			$fields_group_title = $wccpf_options["fields_group_title"];
 		} else {
-			$fields_group_title = "Addiotnal Options : ";
+			$fields_group_title = "Additional Options : ";
 		}
 		
 		if( isset( $cart_item['product_id'] ) && isset( $cart_item['wccpf_unique_key'] ) ) {	
